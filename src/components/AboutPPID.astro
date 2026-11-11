@@ -1,0 +1,300 @@
+---
+import { Image } from "astro:assets";
+import {
+  Target,
+  Compass,
+  Network,
+  ClipboardCheck,
+  Briefcase,
+  ArrowRight,
+  Users,
+  Award,
+  CheckCircle2,
+} from "./icons";
+import strukturPpid from "../assets/images/profil/struktur-ppid.png";
+import anwarSidarta from "../assets/images/pejabat/anwar-sidarta.webp";
+import heriSutanto from "../assets/images/pejabat/heri-sutanto.jpg";
+
+const visiText =
+  "Terwujudnya pelayanan informasi yang adil, transparan, responsif, independen, dan akuntabel (ATRIA) untuk memenuhi hak pemohon informasi publik sesuai dengan ketentuan peraturan perundang-undangan yang berlaku.";
+
+const misiItems = [
+  "Menyediakan informasi publik yang akurat dan dapat dipertanggungjawabkan",
+  "Membangun dan mengembangkan sistem penyediaan dan layanan informasi",
+  "Meningkatkan pengelolaan informasi dan dokumentasi secara baik, efisien, mudah diakses, dan bersifat desentralisasi",
+  "Memanfaatkan teknologi informasi dalam memberikan layanan informasi publik kepada masyarakat dan mendukung pengelolaan keterbukaan informasi publik",
+];
+
+const tugasPreview = [
+  "Mengkoordinasikan dan mengkonsolidasikan pengumpulan bahan informasi dan dokumentasi;",
+  "Menyimpan, mendokumentasikan, menyediakan dan memberi pelayanan informasi kepada publik;",
+  "Melakukan verifikasi bahan informasi publik & uji konsekuensi atas informasi yang dikecualikan;",
+  "Memberikan pelayanan Informasi Publik yang cepat, tepat, dan sederhana.",
+];
+
+const fungsiPreview = [
+  "Pelaksanaan Pengelolaan Informasi Publik & penyusunan pemutakhiran Daftar Informasi Publik;",
+  "Pelayanan perlindungan data pribadi & pengembangan Sistem Informasi Publik;",
+  "Pelayanan permintaan informasi, pengaduan, dan pengelolaan akun media sosial;",
+  "Penyusunan laporan semester/tahunan serta pembinaan, pengawasan, dan evaluasi.",
+];
+---
+
+<section id="profil-ppid" class="py-20 sm:py-24 bg-white relative overflow-hidden">
+  <div class="container-corporate">
+    <!-- Two-Column Corporate Layout -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-start">
+      <!-- Left Column: Profile Description, Visi & Misi, and Pejabat Struktural -->
+      <div class="lg:col-span-6 space-y-6 reveal">
+        <div>
+          <span class="section-eyebrow">Profil Kelembagaan</span>
+          <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#123B68] tracking-tight">
+            Profil PPID BBPPMPV BMTI
+          </h2>
+          <p class="mt-4 text-slate-600 text-sm sm:text-base leading-relaxed">
+            Layanan informasi publik di{" "}
+            <strong class="text-[#202B3C]">
+              Balai Besar Pengembangan Penjaminan Mutu Pendidikan Vokasi Bidang Mesin dan Teknik Industri (BBPPMPV BMTI)
+            </strong>{" "}
+            dikelola secara terpusat satu pintu oleh Pejabat Pengelola Informasi dan Dokumentasi (PPID), yaitu{" "}
+            <strong class="text-[#123B68]">Kepala Bagian Tata Usaha BBPPMPV BMTI</strong>, yang diselenggarakan di Unit Layanan Publik (ULP) Jl. Pesantren KM 2, Cibabat, Cimahi Utara.
+          </p>
+        </div>
+
+        <!-- Visi Card (ATRIA) -->
+        <div class="card-corporate p-6 bg-gradient-to-br from-[#123B68] to-[#0A2544] text-white border-none relative overflow-hidden">
+          <div class="flex items-center gap-2.5 mb-3">
+            <div class="w-9 h-9 rounded-lg bg-[#E5B84B] text-[#07192F] flex items-center justify-center shrink-0">
+              <Target class="w-5 h-5" />
+            </div>
+            <div>
+              <span class="text-[11px] font-bold uppercase tracking-widest text-[#E5B84B]">
+                Visi PPID BBPPMPV BMTI
+              </span>
+              <h3 class="text-base font-bold text-white">Prinsip Pelayanan ATRIA</h3>
+            </div>
+          </div>
+          <p class="text-sm sm:text-[15px] text-slate-100 leading-relaxed font-medium">
+            “{visiText}”
+          </p>
+          <div class="mt-4 pt-3 border-t border-white/15 flex flex-wrap gap-2">
+            {
+              ["Adil", "Transparan", "Responsif", "Independen", "Akuntabel"].map((p) => (
+                <span class="px-2.5 py-1 text-[11px] font-bold rounded-full bg-white/12 text-[#E5B84B] border border-white/15">
+                  {p}
+                </span>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Misi Card -->
+        <div class="card-corporate p-6 bg-[#F5F7FA]">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-2.5">
+              <div class="w-9 h-9 rounded-lg bg-[#1769AA]/12 text-[#1769AA] flex items-center justify-center">
+                <Compass class="w-5 h-5" />
+              </div>
+              <h3 class="text-base sm:text-lg font-bold text-[#123B68]">Misi PPID BBPPMPV BMTI</h3>
+            </div>
+            <a
+              href="/profil/visi-dan-misi"
+              class="text-xs font-bold text-[#1769AA] hover:text-[#123B68] inline-flex items-center gap-1"
+            >
+              <span>Detail</span>
+              <ArrowRight class="w-3.5 h-3.5" />
+            </a>
+          </div>
+          <ol class="space-y-2.5">
+            {
+              misiItems.map((misi, index) => (
+                <li class="flex items-start gap-3 text-xs sm:text-sm text-slate-700">
+                  <span class="w-6 h-6 rounded-full bg-[#123B68] text-[#E5B84B] font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">
+                    {index + 1}
+                  </span>
+                  <span class="leading-relaxed">{misi}</span>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+
+        <!-- Pejabat Struktural Mini-Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <a
+            href="/informasi-publik/daftar-pejabat-struktural"
+            class="card-corporate p-4 flex items-center gap-3.5 group"
+          >
+            <Image
+              src={anwarSidarta}
+              alt="Dr. Anwar Sidarta, S.Si., M.Si. - Kepala BBPPMPV BMTI"
+              width={64}
+              height={64}
+              class="w-14 h-14 rounded-xl object-cover object-top border-2 border-[#E5B84B] shrink-0"
+            />
+            <div class="min-w-0">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-[#1769AA]">
+                Atasan PPID / Kepala Balai
+              </span>
+              <h4 class="text-sm font-bold text-[#123B68] group-hover:text-[#1769AA] truncate">
+                Dr. Anwar Sidarta, S.Si.,M.Si.
+              </h4>
+              <p class="text-xs text-slate-500 truncate">Kepala BBPPMPV BMTI</p>
+            </div>
+          </a>
+
+          <a
+            href="/informasi-publik/daftar-pejabat-struktural"
+            class="card-corporate p-4 flex items-center gap-3.5 group"
+          >
+            <Image
+              src={heriSutanto}
+              alt="Heri Sutanto, S.Kom., M.Kes. - Kepala Bagian Tata Usaha / PPID BBPPMPV BMTI"
+              width={64}
+              height={64}
+              class="w-14 h-14 rounded-xl object-cover object-top border-2 border-[#1769AA] shrink-0"
+            />
+            <div class="min-w-0">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-[#1769AA]">
+                Pejabat Pengelola (PPID)
+              </span>
+              <h4 class="text-sm font-bold text-[#123B68] group-hover:text-[#1769AA] truncate">
+                Heri Sutanto, S.Kom., M.Kes.
+              </h4>
+              <p class="text-xs text-slate-500 truncate">Kepala Bagian Tata Usaha</p>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Column: Supporting Image (Struktur Organisasi) + Tugas & Fungsi Cards -->
+      <div class="lg:col-span-6 space-y-6 reveal reveal-delay-1">
+        <!-- Supporting Visual Card: Bagan Struktur Organisasi PPID -->
+        <div class="card-corporate overflow-hidden">
+          <div class="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between bg-[#F5F7FA]">
+            <div class="flex items-center gap-2.5">
+              <Network class="w-5 h-5 text-[#1769AA]" />
+              <div>
+                <h3 class="text-sm sm:text-base font-bold text-[#123B68]">
+                  Struktur Organisasi PPID BBPPMPV BMTI
+                </h3>
+                <p class="text-xs text-slate-500">
+                  Tim Pertimbangan Informasi, Tim Uji Konsekuensi & Petugas Layanan
+                </p>
+              </div>
+            </div>
+            <a
+              href="/profil/struktur-organisasi"
+              class="px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-xs font-bold text-[#123B68] hover:border-[#1769AA] hover:text-[#1769AA] transition-colors shrink-0"
+            >
+              Perbesar Bagan
+            </a>
+          </div>
+          <a href="/profil/struktur-organisasi" class="block p-4 bg-white img-zoom-wrap">
+            <Image
+              src={strukturPpid}
+              alt="Bagan Struktur Organisasi PPID BBPPMPV BMTI 2025"
+              widths={[480, 800]}
+              sizes="(max-width: 1024px) 100vw, 50vw"
+              class="w-full h-auto max-h-64 object-contain mx-auto"
+            />
+          </a>
+        </div>
+
+        <!-- Two Cards: Tugas PPID & Fungsi PPID -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+          <!-- Tugas Card -->
+          <div class="card-corporate p-5 flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-[#123B68]/10 text-[#123B68] flex items-center justify-center mb-3">
+                <ClipboardCheck class="w-5 h-5" />
+              </div>
+              <h3 class="text-base font-bold text-[#123B68]">8 Tugas Pokok PPID</h3>
+              <p class="text-xs text-slate-500 mt-1 mb-3">
+                Koordinasi, penyimpanan, verifikasi, dan pelayanan informasi publik:
+              </p>
+              <ul class="space-y-2 text-xs text-slate-600">
+                {
+                  tugasPreview.map((item) => (
+                    <li class="flex items-start gap-2">
+                      <CheckCircle2 class="w-3.5 h-3.5 text-[#1769AA] shrink-0 mt-0.5" />
+                      <span>{item}</span>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+            <a
+              href="/profil/tugas-dan-fungsi"
+              class="mt-4 pt-3 border-t border-slate-100 inline-flex items-center justify-between text-xs font-bold text-[#1769AA] hover:text-[#123B68]"
+            >
+              <span>Lihat 8 Tugas Lengkap</span>
+              <ArrowRight class="w-3.5 h-3.5" />
+            </a>
+          </div>
+
+          <!-- Fungsi Card -->
+          <div class="card-corporate p-5 flex flex-col justify-between">
+            <div>
+              <div class="w-10 h-10 rounded-xl bg-[#E5B84B]/20 text-[#123B68] flex items-center justify-center mb-3">
+                <Briefcase class="w-5 h-5" />
+              </div>
+              <h3 class="text-base font-bold text-[#123B68]">8 Fungsi PPID</h3>
+              <p class="text-xs text-slate-500 mt-1 mb-3">
+                Pengelolaan DIP, perlindungan data pribadi, dan evaluasi layanan:
+              </p>
+              <ul class="space-y-2 text-xs text-slate-600">
+                {
+                  fungsiPreview.map((item) => (
+                    <li class="flex items-start gap-2">
+                      <CheckCircle2 class="w-3.5 h-3.5 text-[#E5B84B] shrink-0 mt-0.5" />
+                      <span>{item}</span>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+            <a
+              href="/profil/tugas-dan-fungsi"
+              class="mt-4 pt-3 border-t border-slate-100 inline-flex items-center justify-between text-xs font-bold text-[#1769AA] hover:text-[#123B68]"
+            >
+              <span>Lihat 8 Fungsi Lengkap</span>
+              <ArrowRight class="w-3.5 h-3.5" />
+            </a>
+          </div>
+        </div>
+
+        <!-- Bottom Profile Navigation Strip -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+          <a
+            href="/profil"
+            class="px-4 py-3 rounded-xl bg-[#F5F7FA] hover:bg-[#123B68] text-[#123B68] hover:text-white text-xs font-bold flex items-center justify-between transition-colors"
+          >
+            <span>Seluruh Profil PPID</span>
+            <ArrowRight class="w-3.5 h-3.5" />
+          </a>
+          <a
+            href="/informasi-publik/daftar-kepala"
+            class="px-4 py-3 rounded-xl bg-[#F5F7FA] hover:bg-[#123B68] text-[#123B68] hover:text-white text-xs font-bold flex items-center justify-between transition-colors"
+          >
+            <span class="flex items-center gap-1.5">
+              <Award class="w-3.5 h-3.5 text-[#E5B84B]" />
+              <span>Daftar Kepala Balai</span>
+            </span>
+            <ArrowRight class="w-3.5 h-3.5" />
+          </a>
+          <a
+            href="/informasi-publik/informasi-kepegawaian"
+            class="col-span-2 sm:col-span-1 px-4 py-3 rounded-xl bg-[#F5F7FA] hover:bg-[#123B68] text-[#123B68] hover:text-white text-xs font-bold flex items-center justify-between transition-colors"
+          >
+            <span class="flex items-center gap-1.5">
+              <Users class="w-3.5 h-3.5 text-[#1769AA]" />
+              <span>Profil Kepegawaian</span>
+            </span>
+            <ArrowRight class="w-3.5 h-3.5" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

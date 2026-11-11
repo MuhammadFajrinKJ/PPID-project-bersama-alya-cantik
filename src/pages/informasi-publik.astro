@@ -1,0 +1,70 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import PublicInformation from "../components/PublicInformation.astro";
+import Regulations from "../components/Regulations.astro";
+import BlockRenderer from "../components/BlockRenderer.astro";
+import { pages } from "../data/pages";
+import { ArrowRight } from "../components/icons";
+
+const dipBlocks = pages["informasi-publik/daftar-informasi-publik"].blocks;
+const dikecualikanBlocks = pages["informasi-publik/informasi-dikecualikan"].blocks;
+---
+
+<MainLayout
+  title="Informasi Publik — PPID BBPPMPV BMTI Kemendikdasmen"
+  description="Daftar Informasi Publik (DIP), Informasi Berkala, Informasi Setiap Saat, Informasi Serta Merta, Informasi Dikecualikan, serta Regulasi PPID BBPPMPV BMTI."
+>
+  <PageHeader
+    title="Informasi Publik"
+    eyebrow="Direktori Keterbukaan Informasi"
+    description="Akses lengkap terhadap Daftar Informasi Publik (DIP), Informasi Berkala, Informasi Setiap Saat, Informasi Serta Merta, Informasi Dikecualikan, serta Regulasi PPID BBPPMPV BMTI."
+    breadcrumbs={[{ label: "Informasi Publik" }]}
+    sourceUrl="https://bbppmpvbmti.kemendikdasmen.go.id/Ppid/"
+  />
+
+  <!-- Interactive Public Information Categories & Live Filter -->
+  <PublicInformation />
+
+  <!-- Embedded Daftar Informasi Publik (DIP) & Informasi Dikecualikan Preview -->
+  <section class="py-16 bg-white border-t border-slate-100">
+    <div class="container-corporate space-y-14">
+      <div class="space-y-4 reveal">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-slate-200 pb-3">
+          <div>
+            <span class="section-eyebrow">Dokumen Induk</span>
+            <h2 class="text-2xl font-extrabold text-[#123B68]">Daftar Informasi Publik (DIP)</h2>
+          </div>
+          <a
+            href="/informasi-publik/daftar-informasi-publik"
+            class="text-xs font-bold text-[#1769AA] hover:text-[#123B68] inline-flex items-center gap-1"
+          >
+            <span>Buka Halaman DIP</span>
+            <ArrowRight class="w-3.5 h-3.5" />
+          </a>
+        </div>
+        <BlockRenderer blocks={dipBlocks} slug="informasi-publik/daftar-informasi-publik" />
+      </div>
+
+      <div class="space-y-4 reveal">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-slate-200 pb-3">
+          <div>
+            <span class="section-eyebrow">Hasil Uji Konsekuensi</span>
+            <h2 class="text-2xl font-extrabold text-[#123B68]">Daftar Informasi Dikecualikan</h2>
+          </div>
+          <a
+            href="/informasi-publik/informasi-dikecualikan"
+            class="text-xs font-bold text-[#1769AA] hover:text-[#123B68] inline-flex items-center gap-1"
+          >
+            <span>Buka Halaman Informasi Dikecualikan</span>
+            <ArrowRight class="w-3.5 h-3.5" />
+          </a>
+        </div>
+        <BlockRenderer blocks={dikecualikanBlocks} slug="informasi-publik/informasi-dikecualikan" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Regulasi dan POS Section -->
+  <Regulations />
+</MainLayout>

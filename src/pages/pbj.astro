@@ -1,0 +1,137 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import BlockRenderer from "../components/BlockRenderer.astro";
+import { pages } from "../data/pages";
+import { ExternalLink, FileText, FolderKanban, ArrowRight } from "../components/icons";
+
+const dokumenPbjBlocks = pages["pbj/dokumen-pengadaan-barang-jasa"].blocks;
+const kontrakPbjBlocks = pages["pbj/daftar-kontrak-pbj"].blocks;
+
+const pbjPortals = [
+  {
+    title: "Rencana Umum Pengadaan Barang/Jasa (SiRUP)",
+    category: "SiRUP LKPP · ID Satker 386055",
+    description:
+      "Sistem Informasi Rencana Umum Pengadaan (SiRUP) satuan kerja BBPPMPV BMTI pada portal resmi INAPROC.",
+    href: "https://sirup.inaproc.id/sirup/home/penyediaSatker?idSatker=386055",
+    external: true,
+  },
+  {
+    title: "Pengumuman Pengadaan Barang/Jasa (SPSE)",
+    category: "LPSE / SPSE Kemendikdasmen",
+    description:
+      "Layanan Pengadaan Secara Elektronik (SPSE) Kementerian Pendidikan Dasar dan Menengah.",
+    href: "https://spse.inaproc.id/kemendikdasmen/",
+    external: true,
+  },
+  {
+    title: "Dokumen Pengadaan Barang/Jasa (2023–2026)",
+    category: "Dokumen Paket PBJ",
+    description:
+      "Daftar paket dokumen pengadaan langsung dan tender pekerjaan di lingkungan BBPPMPV BMTI tahun 2023 s.d. 2026.",
+    href: "/pbj/dokumen-pengadaan-barang-jasa",
+    external: false,
+  },
+  {
+    title: "Daftar Kontrak Pengadaan Barang dan Jasa",
+    category: "Kontrak PBJ",
+    description:
+      "Daftar dokumen kontrak pengadaan barang dan jasa yang telah dikuasai oleh BBPPMPV BMTI.",
+    href: "/pbj/daftar-kontrak-pbj",
+    external: false,
+  },
+];
+---
+
+<MainLayout
+  title="Pengadaan Barang/Jasa (PBJ) — PPID BBPPMPV BMTI Kemendikdasmen"
+  description="Transparansi Pengadaan Barang/Jasa (PBJ) BBPPMPV BMTI meliputi Rencana Umum Pengadaan (SiRUP), Pengumuman SPSE, Dokumen Paket PBJ 2023–2026, dan Daftar Kontrak PBJ."
+>
+  <PageHeader
+    title="Pengadaan Barang/Jasa (PBJ)"
+    eyebrow="Transparansi Pengadaan"
+    description="Informasi Rencana Umum Pengadaan Barang/Jasa (SiRUP), Pengumuman Pengadaan (SPSE), Dokumen Paket Pengadaan Tahun 2023–2026, serta Daftar Kontrak PBJ BBPPMPV BMTI."
+    breadcrumbs={[{ label: "Pengadaan Barang/Jasa (PBJ)" }]}
+    sourceUrl="https://bbppmpvbmti.kemendikdasmen.go.id/Ppid/dokumen-pengadaan-barang-jasa/"
+  />
+
+  <section class="py-16 bg-[#F5F7FA]">
+    <div class="container-corporate space-y-14">
+      <!-- 4 Main PBJ Portal & Document Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 reveal">
+        {
+          pbjPortals.map((item) => (
+            <a
+              href={item.href}
+              target={item.external ? "_blank" : undefined}
+              rel={item.external ? "noopener noreferrer" : undefined}
+              class="card-corporate p-6 bg-white flex flex-col justify-between group"
+            >
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-3">
+                  <span class="px-2.5 py-1 rounded text-[11px] font-bold uppercase tracking-wider bg-[#123B68]/10 text-[#123B68]">
+                    {item.category}
+                  </span>
+                  <FolderKanban class="w-5 h-5 text-[#1769AA]" />
+                </div>
+                <h2 class="text-lg font-extrabold text-[#123B68] group-hover:text-[#1769AA]">
+                  {item.title}
+                </h2>
+                <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+              <div class="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#1769AA]">
+                <span>{item.external ? "Buka Portal Resmi" : "Lihat Dokumen"}</span>
+                {item.external ? (
+                  <ExternalLink class="w-4 h-4" />
+                ) : (
+                  <ArrowRight class="w-4 h-4" />
+                )}
+              </div>
+            </a>
+          ))
+        }
+      </div>
+
+      <!-- Dokumen Pengadaan Barang/Jasa 2023 - 2026 -->
+      <div class="space-y-4 reveal">
+        <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+          <div>
+            <span class="section-eyebrow">Rekapitulasi Tahunan</span>
+            <h2 class="text-2xl font-extrabold text-[#123B68]">
+              Dokumen Pengadaan Barang/Jasa (2023–2026)
+            </h2>
+          </div>
+          <a
+            href="/pbj/dokumen-pengadaan-barang-jasa"
+            class="text-xs font-bold text-[#1769AA] hover:text-[#123B68] inline-flex items-center gap-1"
+          >
+            <span>Halaman Mandiri</span>
+            <ArrowRight class="w-3.5 h-3.5" />
+          </a>
+        </div>
+        <BlockRenderer blocks={dokumenPbjBlocks} slug="pbj/dokumen-pengadaan-barang-jasa" />
+      </div>
+
+      <!-- Daftar Kontrak PBJ -->
+      <div class="space-y-4 reveal">
+        <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+          <div>
+            <span class="section-eyebrow">Kontrak Dikuasai</span>
+            <h2 class="text-2xl font-extrabold text-[#123B68]">Daftar Kontrak PBJ</h2>
+          </div>
+          <a
+            href="/pbj/daftar-kontrak-pbj"
+            class="text-xs font-bold text-[#1769AA] hover:text-[#123B68] inline-flex items-center gap-1"
+          >
+            <span>Halaman Mandiri</span>
+            <ArrowRight class="w-3.5 h-3.5" />
+          </a>
+        </div>
+        <BlockRenderer blocks={kontrakPbjBlocks} slug="pbj/daftar-kontrak-pbj" />
+      </div>
+    </div>
+  </section>
+</MainLayout>

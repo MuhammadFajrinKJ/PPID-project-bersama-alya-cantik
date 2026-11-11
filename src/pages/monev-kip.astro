@@ -1,0 +1,73 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { monevKipAspects } from '../data/site';
+import { FolderOpen, ExternalLink, CheckCircle2 } from '../components/icons';
+---
+
+<MainLayout
+  title="Monitoring dan Evaluasi (Monev) KIP — PPID BBPPMPV BMTI"
+  description="Dokumentasi bukti dukung Monitoring dan Evaluasi Keterbukaan Informasi Publik (Monev KIP) BBPPMPV BMTI meliputi 6 aspek penilaian utama."
+>
+  <PageHeader
+    title="Monitoring & Evaluasi (Monev) KIP"
+    eyebrow="Monev KIP"
+    description="Transparansi bukti dukung penilaian mandiri Monitoring dan Evaluasi Keterbukaan Informasi Publik di lingkungan BBPPMPV BMTI."
+    breadcrumbs={[{ label: 'Monev KIP' }]}
+    sourceUrl="https://bbppmpvbmti.kemendikdasmen.go.id/Ppid/"
+  />
+
+  <section class="py-16 lg:py-24 bg-[#F5F7FA]">
+    <div class="container-corporate">
+      <div class="max-w-3xl mb-12 reveal">
+        <span class="section-eyebrow">Instrumen Penilaian KIP</span>
+        <h2 class="text-2xl lg:text-3xl font-extrabold text-[#123B68] tracking-tight mb-3">
+          Enam Aspek Bukti Dukung Monev KIP
+        </h2>
+        <p class="text-slate-600 text-sm leading-relaxed">
+          Pilih aspek di bawah ini untuk mengakses repositori dokumen bukti dukung Monitoring dan Evaluasi Keterbukaan Informasi Publik (Monev KIP) BBPPMPV BMTI melalui Google Drive resmi.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {monevKipAspects.map((aspect, idx) => (
+          <a
+            href={aspect.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class={`card-corporate p-7 flex flex-col justify-between group reveal reveal-delay-${(idx % 3) + 1}`}
+          >
+            <div>
+              <div class="flex items-center justify-between mb-6">
+                <div class="w-12 h-12 rounded-2xl bg-[#123B68] text-[#E5B84B] flex items-center justify-center shadow-md group-hover:bg-[#1769AA] transition-colors">
+                  <FolderOpen class="w-6 h-6" />
+                </div>
+                <span class="px-3 py-1 rounded-full bg-amber-50 border border-amber-200/80 text-amber-900 text-xs font-extrabold">
+                  Aspek 0{idx + 1}
+                </span>
+              </div>
+
+              <h3 class="text-xl font-extrabold text-[#123B68] group-hover:text-[#1769AA] transition-colors mb-3">
+                {aspect.title}
+              </h3>
+              <p class="text-sm text-slate-600 leading-relaxed mb-6">
+                {aspect.description}
+              </p>
+            </div>
+
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#123B68] group-hover:text-[#1769AA]">
+              <span class="inline-flex items-center gap-1.5">
+                <CheckCircle2 class="w-4 h-4 text-emerald-600" />
+                Repositori Google Drive
+              </span>
+              <span class="inline-flex items-center gap-1">
+                Buka Folder
+                <ExternalLink class="w-3.5 h-3.5" />
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</MainLayout>

@@ -1,0 +1,134 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { siteConfig } from "../data/site";
+import { MessageCircle } from "../components/icons";
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "PPID BBPPMPV BMTI — Pejabat Pengelola Informasi dan Dokumentasi Kemendikdasmen",
+  description = "Portal Resmi Pejabat Pengelola Informasi dan Dokumentasi (PPID) Balai Besar Pengembangan Penjaminan Mutu Pendidikan Vokasi Bidang Mesin dan Teknik Industri (BBPPMPV BMTI) Kementerian Pendidikan Dasar dan Menengah.",
+} = Astro.props;
+
+const fullTitle = title.includes("PPID BBPPMPV BMTI")
+  ? title
+  : `${title} | PPID BBPPMPV BMTI Kemendikdasmen`;
+---
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#123B68" />
+
+    <!-- Primary SEO Meta Tags -->
+    <title>{fullTitle}</title>
+    <meta name="title" content={fullTitle} />
+    <meta name="description" content={description} />
+    <meta
+      name="keywords"
+      content="PPID BBPPMPV BMTI, Pejabat Pengelola Informasi dan Dokumentasi, BBPPMPV BMTI Cimahi, Kemendikdasmen, Informasi Publik, Keterbukaan Informasi Publik, Layanan Informasi"
+    />
+
+    <!-- Open Graph / Social -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content={siteConfig.name} />
+
+    <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-white text-[#202B3C] antialiased selection:bg-[#E5B84B] selection:text-[#07192F]">
+    <!-- Lightweight Top Loading Bar -->
+    <div
+      id="page-load-bar"
+      class="fixed top-0 left-0 z-[200] h-1 bg-gradient-to-r from-[#E5B84B] via-[#1769AA] to-[#E5B84B] transition-all duration-500 ease-out w-0"
+      aria-hidden="true"
+    >
+    </div>
+
+    <!-- Skip to Main Content for Accessibility -->
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[300] focus:px-4 focus:py-2 focus:bg-[#123B68] focus:text-white focus:rounded-lg focus:font-bold"
+    >
+      Lewati ke Konten Utama
+    </a>
+
+    <!-- Header & Sticky Navigation -->
+    <Header />
+
+    <!-- Main Page Content -->
+    <main id="main-content" class="flex-1">
+      <slot />
+    </main>
+
+    <!-- Floating Quick Contact WhatsApp ULP Button -->
+    <a
+      href={siteConfig.contact.whatsappHref}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Hubungi Layanan WhatsApp ULP PPID BBPPMPV BMTI"
+      class="fixed bottom-6 right-6 z-40 flex items-center gap-2.5 px-4 py-3 rounded-full bg-[#123B68] hover:bg-[#1769AA] text-white shadow-2xl border-2 border-[#E5B84B] transition-all duration-300 hover:-translate-y-1 group"
+    >
+      <MessageCircle class="w-5 h-5 text-[#E5B84B] group-hover:scale-110 transition-transform" />
+      <span class="hidden sm:inline text-xs font-bold tracking-wide">
+        Layanan WA PPID
+      </span>
+    </a>
+
+    <!-- Corporate Footer -->
+    <Footer />
+
+    <!-- Scroll Reveal & Lightweight Page Loading Script -->
+    <script>
+      function initEffects() {
+        // 1. Lightweight Top Progress Bar
+        const loadBar = document.getElementById("page-load-bar");
+        if (loadBar) {
+          loadBar.style.width = "100%";
+          setTimeout(() => {
+            loadBar.style.opacity = "0";
+          }, 380);
+        }
+
+        // 2. Scroll Reveal Observer
+        const revealEls = document.querySelectorAll<HTMLElement>(".reveal");
+        if ("IntersectionObserver" in window) {
+          const observer = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add("is-visible");
+                  observer.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.08, rootMargin: "0px 0px -30px 0px" }
+          );
+
+          revealEls.forEach((el) => observer.observe(el));
+        } else {
+          revealEls.forEach((el) => el.classList.add("is-visible"));
+        }
+      }
+
+      initEffects();
+    </script>
+  </body>
+</html>

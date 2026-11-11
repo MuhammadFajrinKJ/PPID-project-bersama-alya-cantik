@@ -1,0 +1,71 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import { tautanLinks } from '../data/site';
+import { Globe, ArrowUpRight } from '../components/icons';
+---
+
+<MainLayout
+  title="Tautan Eksternal & Portal Terintegrasi — PPID BBPPMPV BMTI"
+  description="Daftar tautan resmi portal layanan Kementerian Pendidikan Dasar dan Menengah, Direktorat Jenderal Pendidikan Vokasi, LPSE, UKPBJ, dan layanan internal BBPPMPV BMTI."
+>
+  <PageHeader
+    title="Tautan Layanan & Portal Terintegrasi"
+    eyebrow="Tautan Resmi"
+    description="Akses cepat menuju portal informasi publik, layanan kepegawaian, pengadaan barang/jasa, serta ekosistem digital BBPPMPV BMTI dan Kemendikdasmen."
+    breadcrumbs={[{ label: 'Tautan' }]}
+    sourceUrl="https://bbppmpvbmti.kemendikdasmen.go.id/Ppid/"
+  />
+
+  <section class="py-16 lg:py-24 bg-[#F5F7FA]">
+    <div class="container-corporate">
+      <div class="max-w-3xl mb-12 reveal">
+        <span class="section-eyebrow">Jejaring & Ekosistem Digital</span>
+        <h2 class="text-2xl lg:text-3xl font-extrabold text-[#123B68] tracking-tight mb-3">
+          Portal Resmi Kemendikdasmen & BBPPMPV BMTI
+        </h2>
+        <p class="text-slate-600 text-sm leading-relaxed">
+          Seluruh tautan di bawah ini merupakan bagian dari menu resmi <strong>Tautan</strong> pada portal PPID BBPPMPV BMTI yang menghubungkan masyarakat dengan ekosistem keterbukaan informasi publik nasional.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {tautanLinks.map((item, idx) => (
+          <a
+            href={item.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class={`card-corporate p-6 flex flex-col justify-between group reveal reveal-delay-${(idx % 4) + 1}`}
+          >
+            <div>
+              <div class="flex items-center justify-between gap-2 mb-5">
+                <div class="w-12 h-12 rounded-xl bg-[#123B68]/5 text-[#123B68] flex items-center justify-center group-hover:bg-[#123B68] group-hover:text-[#E5B84B] transition-colors">
+                  <Globe class="w-6 h-6" />
+                </div>
+                <span class="px-2.5 py-1 rounded-full bg-slate-100 text-[#123B68] text-[11px] font-bold uppercase tracking-wider">
+                  {item.category}
+                </span>
+              </div>
+              <h3 class="text-lg font-extrabold text-[#123B68] group-hover:text-[#1769AA] transition-colors mb-2">
+                {item.title}
+              </h3>
+              <p class="text-xs text-slate-600 leading-relaxed mb-6">
+                {item.description}
+              </p>
+            </div>
+
+            <div class="pt-4 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-[11px] font-mono text-slate-400 truncate max-w-[180px]">
+                {item.href.replace(/^https?:\/\//, '')}
+              </span>
+              <span class="inline-flex items-center gap-1 text-xs font-bold text-[#1769AA] group-hover:text-[#123B68]">
+                Buka
+                <ArrowUpRight class="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+</MainLayout>

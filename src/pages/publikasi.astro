@@ -1,0 +1,74 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import BlockRenderer from "../components/BlockRenderer.astro";
+import { pages } from "../data/pages";
+import { ArrowRight } from "../components/icons";
+
+const majalahBlocks = pages["publikasi/majalah-swara"].blocks;
+const galeriBlocks = pages["publikasi/galeri-dokumentasi"].blocks;
+---
+
+<MainLayout
+  title="Publikasi — Majalah Swara & Galeri Dokumentasi | PPID BBPPMPV BMTI"
+  description="Publikasi resmi Majalah Swara dan Galeri Dokumentasi kegiatan di lingkungan BBPPMPV BMTI Kementerian Pendidikan Dasar dan Menengah."
+>
+  <PageHeader
+    title="Publikasi & Dokumentasi"
+    eyebrow="Media & Dokumentasi Resmi"
+    description="Koleksi terbitan Majalah Swara serta dokumentasi foto kegiatan pelatihan, kemitraan, dan layanan publik BBPPMPV BMTI."
+    breadcrumbs={[{ label: "Publikasi" }]}
+    sourceUrl="https://bbppmpvbmti.kemendikdasmen.go.id/Ppid/majalah-swara/"
+  />
+
+  <section class="py-16 bg-[#F5F7FA]">
+    <div class="container-corporate space-y-16">
+      <!-- Majalah Swara -->
+      <div id="majalah-swara" class="space-y-4 reveal">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-slate-200 pb-3">
+          <div>
+            <span class="section-eyebrow">Terbitan Berkala</span>
+            <h2 class="text-2xl font-extrabold text-[#123B68]">Majalah Swara BBPPMPV BMTI</h2>
+          </div>
+          <a
+            href="/publikasi/majalah-swara"
+            class="text-xs font-bold text-[#1769AA] hover:text-[#123B68] inline-flex items-center gap-1"
+          >
+            <span>Halaman Mandiri Majalah Swara</span>
+            <ArrowRight class="w-3.5 h-3.5" />
+          </a>
+        </div>
+        <BlockRenderer blocks={majalahBlocks} slug="publikasi/majalah-swara" />
+      </div>
+
+      <!-- Galeri Dokumentasi -->
+      <div id="galeri-dokumentasi" class="space-y-4 reveal">
+        <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-3 border-b border-slate-200 pb-3">
+          <div>
+            <span class="section-eyebrow">Rekam Jejak Visual</span>
+            <h2 class="text-2xl font-extrabold text-[#123B68]">Galeri Dokumentasi Kegiatan</h2>
+          </div>
+          <div class="flex flex-wrap items-center gap-4">
+            <a
+              href="https://linktr.ee/bbppmpvbmti"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-xs font-bold text-[#123B68] hover:text-[#1769AA] inline-flex items-center gap-1"
+            >
+              <span>Media Sosial Resmi (Linktree)</span>
+              <ArrowRight class="w-3.5 h-3.5" />
+            </a>
+            <a
+              href="/publikasi/galeri-dokumentasi"
+              class="text-xs font-bold text-[#1769AA] hover:text-[#123B68] inline-flex items-center gap-1"
+            >
+              <span>Halaman Mandiri Galeri Dokumentasi</span>
+              <ArrowRight class="w-3.5 h-3.5" />
+            </a>
+          </div>
+        </div>
+        <BlockRenderer blocks={galeriBlocks} slug="publikasi/galeri-dokumentasi" />
+      </div>
+    </div>
+  </section>
+</MainLayout>

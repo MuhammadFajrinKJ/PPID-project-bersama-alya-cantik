@@ -1,0 +1,304 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import { siteConfig } from "../data/site";
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
+  MessageCircle,
+  ExternalLink,
+  FileCheck2,
+  ShieldAlert,
+  Megaphone,
+  Building2,
+} from "../components/icons";
+---
+
+<MainLayout
+  title="Kontak Kami — PPID BBPPMPV BMTI Kemendikdasmen"
+  description="Informasi alamat Unit Layanan Publik (ULP), nomor telepon, WhatsApp, email resmi, dan jadwal pelayanan informasi PPID BBPPMPV BMTI di Cimahi, Jawa Barat."
+>
+  <PageHeader
+    title="Kontak Kami & Unit Layanan Publik"
+    eyebrow="Saluran Komunikasi Resmi"
+    description="Hubungi Unit Layanan Publik (ULP) PPID BBPPMPV BMTI untuk permohonan informasi publik, konsultasi layanan, maupun penyampaian pengaduan masyarakat."
+    breadcrumbs={[{ label: "Kontak Kami" }]}
+    sourceUrl="https://bbppmpvbmti.kemendikdasmen.go.id/Ppid/kontak-kami/"
+  />
+
+  <section class="py-16 sm:py-20 bg-[#F5F7FA]">
+    <div class="container-corporate space-y-12">
+      <!-- Top Contact Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 reveal">
+        <!-- Address Card -->
+        <div class="card-corporate p-6 bg-white flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-[#123B68]/10 text-[#123B68] flex items-center justify-center mb-4">
+              <MapPin class="w-6 h-6" />
+            </div>
+            <span class="text-[11px] font-bold uppercase tracking-wider text-[#1769AA]">
+              Lokasi Layanan Langsung
+            </span>
+            <h2 class="text-lg font-extrabold text-[#123B68] mt-1">Alamat Kantor & ULP</h2>
+            <p class="text-xs sm:text-sm text-slate-600 mt-2 leading-relaxed">
+              {siteConfig.contact.address}
+            </p>
+          </div>
+          <a
+            href={siteConfig.contact.mapsLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-5 pt-3 border-t border-slate-100 inline-flex items-center justify-between text-xs font-bold text-[#1769AA] hover:text-[#123B68]"
+          >
+            <span>Buka di Google Maps</span>
+            <ExternalLink class="w-3.5 h-3.5" />
+          </a>
+        </div>
+
+        <!-- Phone & Fax Card -->
+        <div class="card-corporate p-6 bg-white flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-[#1769AA]/10 text-[#1769AA] flex items-center justify-center mb-4">
+              <Phone class="w-6 h-6" />
+            </div>
+            <span class="text-[11px] font-bold uppercase tracking-wider text-[#1769AA]">
+              Saluran Telepon & Faks
+            </span>
+            <h2 class="text-lg font-extrabold text-[#123B68] mt-1">Telepon Resmi</h2>
+            <div class="mt-2 space-y-1.5 text-xs sm:text-sm text-slate-600">
+              <p>
+                Telepon:{" "}
+                <a href={siteConfig.contact.phoneHref} class="font-bold text-[#123B68] hover:underline">
+                  {siteConfig.contact.phone}
+                </a>
+              </p>
+              <p>
+                Faksimile: <strong class="text-slate-800">{siteConfig.contact.fax}</strong>
+              </p>
+            </div>
+          </div>
+          <a
+            href={siteConfig.contact.phoneHref}
+            class="mt-5 pt-3 border-t border-slate-100 inline-flex items-center justify-between text-xs font-bold text-[#1769AA] hover:text-[#123B68]"
+          >
+            <span>Hubungi via Telepon</span>
+            <Phone class="w-3.5 h-3.5" />
+          </a>
+        </div>
+
+        <!-- WhatsApp Card -->
+        <div class="card-corporate p-6 bg-white flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-700 flex items-center justify-center mb-4">
+              <MessageCircle class="w-6 h-6" />
+            </div>
+            <span class="text-[11px] font-bold uppercase tracking-wider text-emerald-700">
+              Pesan Instan
+            </span>
+            <h2 class="text-lg font-extrabold text-[#123B68] mt-1">Layanan WhatsApp</h2>
+            <div class="mt-2 space-y-1.5 text-xs sm:text-sm text-slate-600">
+              <p>
+                WA Layanan ULP:{" "}
+                <a
+                  href={siteConfig.contact.whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="font-bold text-[#123B68] hover:underline"
+                >
+                  {siteConfig.contact.whatsapp}
+                </a>
+              </p>
+              <p>
+                WA Pengaduan:{" "}
+                <a
+                  href={siteConfig.contact.whatsappPengaduanHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="font-bold text-[#123B68] hover:underline"
+                >
+                  {siteConfig.contact.whatsappPengaduan}
+                </a>
+              </p>
+            </div>
+          </div>
+          <a
+            href={siteConfig.contact.whatsappHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-5 pt-3 border-t border-slate-100 inline-flex items-center justify-between text-xs font-bold text-emerald-700 hover:text-emerald-800"
+          >
+            <span>Kirim Pesan WhatsApp</span>
+            <ExternalLink class="w-3.5 h-3.5" />
+          </a>
+        </div>
+
+        <!-- Email Card -->
+        <div class="card-corporate p-6 bg-white flex flex-col justify-between">
+          <div>
+            <div class="w-12 h-12 rounded-xl bg-[#E5B84B]/25 text-[#123B68] flex items-center justify-center mb-4">
+              <Mail class="w-6 h-6" />
+            </div>
+            <span class="text-[11px] font-bold uppercase tracking-wider text-[#1769AA]">
+              Korespondensi Elektronik
+            </span>
+            <h2 class="text-lg font-extrabold text-[#123B68] mt-1">Pos-el (Email) Resmi</h2>
+            <div class="mt-2 space-y-1.5 text-xs text-slate-600 break-all">
+              <p>
+                Utama:{" "}
+                <a
+                  href={`mailto:${siteConfig.contact.email}`}
+                  class="font-bold text-[#123B68] hover:underline"
+                >
+                  {siteConfig.contact.email}
+                </a>
+              </p>
+              <p>
+                Pengaduan:{" "}
+                <a
+                  href={`mailto:${siteConfig.contact.emailPengaduan}`}
+                  class="font-bold text-[#1769AA] hover:underline"
+                >
+                  {siteConfig.contact.emailPengaduan}
+                </a>
+              </p>
+            </div>
+          </div>
+          <a
+            href={`mailto:${siteConfig.contact.email}`}
+            class="mt-5 pt-3 border-t border-slate-100 inline-flex items-center justify-between text-xs font-bold text-[#1769AA] hover:text-[#123B68]"
+          >
+            <span>Kirim Surel Resmi</span>
+            <Mail class="w-3.5 h-3.5" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Two-Column Section: Schedule & Direct Online Channels + Embedded Google Maps -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch reveal reveal-delay-1">
+        <!-- Left: Service Schedule & Direct Service Links (5 cols) -->
+        <div class="lg:col-span-5 space-y-6">
+          <div class="card-corporate overflow-hidden bg-white">
+            <div class="p-5 bg-[#123B68] text-white flex items-center gap-3">
+              <Clock class="w-5 h-5 text-[#E5B84B]" />
+              <div>
+                <h3 class="text-base font-extrabold">Jadwal Pelayanan Informasi ULP</h3>
+                <p class="text-xs text-slate-300">
+                  Bagian Tata Usaha — Hubungan Masyarakat & Pelayanan Publik
+                </p>
+              </div>
+            </div>
+            <div class="p-5 divide-y divide-slate-100 text-xs sm:text-sm">
+              <div class="py-2.5 flex justify-between">
+                <span class="font-bold text-[#123B68]">Pendaftaran</span>
+                <span class="font-semibold text-slate-700">08.00 – 11.00 WIB</span>
+              </div>
+              <div class="py-2.5 flex justify-between">
+                <span class="font-bold text-[#123B68]">Senin – Kamis</span>
+                <span class="font-semibold text-slate-700">09.00 – 15.00 WIB</span>
+              </div>
+              <div class="py-2.5 flex justify-between">
+                <span class="text-slate-500">Istirahat (Senin – Kamis)</span>
+                <span class="text-slate-600">12.00 – 13.00 WIB</span>
+              </div>
+              <div class="py-2.5 flex justify-between">
+                <span class="font-bold text-[#123B68]">Jumat</span>
+                <span class="font-semibold text-slate-700">09.00 – 15.30 WIB</span>
+              </div>
+              <div class="py-2.5 flex justify-between">
+                <span class="text-slate-500">Istirahat (Jumat)</span>
+                <span class="text-slate-600">11.30 – 13.30 WIB</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-corporate p-6 bg-white space-y-3.5">
+            <div class="flex items-center gap-2">
+              <Building2 class="w-5 h-5 text-[#1769AA]" />
+              <h3 class="text-base font-extrabold text-[#123B68]">
+                Akses Cepat Formulir & Pengaduan Daring
+              </h3>
+            </div>
+            <p class="text-xs text-slate-500">
+              Ajukan permohonan informasi publik atau keberatan secara tidak langsung melalui formulir resmi berikut:
+            </p>
+            <div class="space-y-2.5">
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSfZH6eWc5zwnniOs0-jn6siXyABt5-eW2W5RrUSy0eSHoRJbQ/viewform"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center justify-between p-3.5 rounded-xl bg-[#F5F7FA] hover:bg-[#123B68] text-[#123B68] hover:text-white text-xs sm:text-sm font-bold transition-colors group"
+              >
+                <span class="flex items-center gap-2.5">
+                  <FileCheck2 class="w-4 h-4 text-[#1769AA] group-hover:text-[#E5B84B]" />
+                  <span>Formulir Online Permintaan Informasi</span>
+                </span>
+                <ExternalLink class="w-4 h-4" />
+              </a>
+
+              <a
+                href="https://docs.google.com/forms/d/170FUxSNhSmZuMIt3RAiSTl3qYsUImNLQgUT97cEvsM8/viewform"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center justify-between p-3.5 rounded-xl bg-[#F5F7FA] hover:bg-[#123B68] text-[#123B68] hover:text-white text-xs sm:text-sm font-bold transition-colors group"
+              >
+                <span class="flex items-center gap-2.5">
+                  <ShieldAlert class="w-4 h-4 text-[#1769AA] group-hover:text-[#E5B84B]" />
+                  <span>Formulir Online Keberatan Informasi</span>
+                </span>
+                <ExternalLink class="w-4 h-4" />
+              </a>
+
+              <a
+                href="https://wbs.kemendikdasmen.go.id/"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="flex items-center justify-between p-3.5 rounded-xl bg-[#F5F7FA] hover:bg-[#123B68] text-[#123B68] hover:text-white text-xs sm:text-sm font-bold transition-colors group"
+              >
+                <span class="flex items-center gap-2.5">
+                  <Megaphone class="w-4 h-4 text-[#1769AA] group-hover:text-[#E5B84B]" />
+                  <span>Whistle Blowing System (WBS Kemendikdasmen)</span>
+                </span>
+                <ExternalLink class="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Embedded Google Maps (7 cols) -->
+        <div class="lg:col-span-7 card-corporate overflow-hidden bg-white flex flex-col">
+          <div class="p-4 sm:p-5 bg-[#F5F7FA] border-b border-slate-200 flex items-center justify-between">
+            <div>
+              <h3 class="text-sm sm:text-base font-extrabold text-[#123B68]">
+                Peta Lokasi BBPPMPV BMTI Cimahi
+              </h3>
+              <p class="text-xs text-slate-500">
+                Jl. Pesantren KM 2, Cibabat, Kec. Cimahi Utara, Kota Cimahi, Jawa Barat 40513
+              </p>
+            </div>
+            <a
+              href={siteConfig.contact.mapsLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="px-3 py-1.5 rounded-lg bg-white border border-slate-200 text-xs font-bold text-[#123B68] hover:text-[#1769AA] inline-flex items-center gap-1 shrink-0"
+            >
+              <span>Rute Lokasi</span>
+              <ExternalLink class="w-3.5 h-3.5" />
+            </a>
+          </div>
+          <div class="flex-1 min-h-[380px] sm:min-h-[460px] bg-slate-100">
+            <iframe
+              src={siteConfig.contact.mapsEmbedUrl}
+              title="Peta Lokasi BBPPMPV BMTI Cimahi"
+              loading="lazy"
+              class="w-full h-full min-h-[380px] sm:min-h-[460px] border-0"
+              referrerpolicy="no-referrer-when-downgrade"
+            >
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</MainLayout>

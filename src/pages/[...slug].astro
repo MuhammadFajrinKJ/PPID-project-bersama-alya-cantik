@@ -1,0 +1,141 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import BlockRenderer from "../components/BlockRenderer.astro";
+import { pages, type PageData } from "../data/pages";
+import { ChevronRight, FileCheck2, Phone } from "../components/icons";
+import { siteConfig } from "../data/site";
+
+export function getStaticPaths() {
+  return Object.entries(pages).map(([slug, page]) => ({
+    params: { slug },
+    props: { slug, page },
+  }));
+}
+
+interface Props {
+  slug: string;
+  page: PageData;
+}
+
+const { slug, page } = Astro.props;
+
+const sectionPrefix = slug.split("/")[0];
+const sectionMap: Record<string, { label: string; href: string }> = {
+  profil: { label: "Profil PPID", href: "/profil" },
+  "informasi-publik": { label: "Informasi Publik", href: "/informasi-publik" },
+  "layanan-informasi": { label: "Layanan Informasi", href: "/layanan-informasi" },
+  publikasi: { label: "Publikasi", href: "/publikasi" },
+  pbj: { label: "Pengadaan Barang/Jasa (PBJ)", href: "/pbj" },
+};
+
+const parentSection = sectionMap[sectionPrefix] || {
+  label: "Informasi Publik",
+  href: "/informasi-publik",
+};
+
+const siblingPages = Object.entries(pages)
+  .filter(([k]) => k.startsWith(`${sectionPrefix}/`))
+  .map(([k, v]) => ({
+    slug: k,
+    title: v.title,
+    href: `/${k}`,
+    active: k === slug,
+  }));
+---
+
+<MainLayout
+  title={`${page.title} — PPID BBPPMPV BMTI Kemendikdasmen`}
+  description={page.description || `${page.title} pada portal resmi Pejabat Pengelola Informasi dan Dokumentasi (PPID) BBPPMPV BMTI Kemendikdasmen.`}
+>
+  <PageHeader
+    title={page.title}
+    eyebrow={parentSection.label}
+    description={page.description}
+    breadcrumbs={[
+      { label: parentSection.label, href: parentSection.href },
+      { label: page.title },
+    ]}
+    sourceUrl={page.source}
+  />
+
+  <section class="py-14 sm:py-18 bg-[#F5F7FA]">
+    <div class="container-corporate">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Main Content Area (8 cols) -->
+        <div class="lg:col-span-8">
+          <BlockRenderer blocks={page.blocks} slug={slug} />
+        </div>
+
+        <!-- Sidebar Navigation & Quick Service Card (4 cols) -->
+        <aside class="lg:col-span-4 space-y-6 lg:sticky lg:top-28">
+          <!-- Sibling Pages Menu -->
+          <div class="card-corporate overflow-hidden bg-white">
+            <div class="p-4 sm:p-5 bg-[#123B68] text-white">
+              <span class="text-[10px] font-bold uppercase tracking-widest text-[#E5B84B] block">
+                Menu Kategori
+              </span>
+              <h2 class="text-base font-extrabold mt-0.5">{parentSection.label}</h2>
+            </div>
+            <ul class="divide-y divide-slate-100 max-h-[420px] overflow-y-auto p-2">
+              {
+                siblingPages.map((sib) => (
+                  <li>
+                    <a
+                      href={sib.href}
+                      class:list={[
+                        "flex items-center justify-between gap-2 px-3.5 py-2.5 rounded-lg text-xs sm:text-sm font-semibold transition-colors",
+                        sib.active
+                          ? "bg-[#123B68]/10 text-[#123B68] font-bold border-l-4 border-[#E5B84B]"
+                          : "text-slate-700 hover:bg-[#F5F7FA] hover:text-[#123B68]",
+                      ]}
+                    >
+                      <span class="line-clamp-1">{sib.title}</span>
+                      <ChevronRight
+                        class:list={[
+                          "w-4 h-4 shrink-0",
+                          sib.active ? "text-[#1769AA]" : "text-slate-400",
+                        ]}
+                      />
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          <!-- Help / CTA Card -->
+          <div class="card-corporate p-6 bg-gradient-to-br from-[#123B68] to-[#0A2544] text-white border-none space-y-4">
+            <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-[#E5B84B] text-[#07192F]">
+              Unit Layanan Publik (ULP)
+            </span>
+            <h3 class="text-lg font-extrabold text-white">
+              Butuh Dokumen atau Informasi Publik Lainnya?
+            </h3>
+            <p class="text-xs text-slate-200 leading-relaxed">
+              Sampaikan permohonan informasi publik secara daring atau hubungi petugas layanan informasi PPID BBPPMPV BMTI pada jam kerja.
+            </p>
+            <div class="space-y-2 pt-1">
+              <a
+                href="/layanan-informasi/formulir-permintaan-informasi"
+                class="btn-accent w-full justify-center !py-2.5 !text-xs"
+              >
+                <FileCheck2 class="w-4 h-4" />
+                <span>Formulir Permohonan Informasi</span>
+              </a>
+              <a
+                href={siteConfig.contact.whatsappHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn-outline-light w-full justify-center !py-2.5 !text-xs"
+              >
+                <Phone class="w-3.5 h-3.5 text-[#E5B84B]" />
+                <span>WhatsApp ULP: {siteConfig.contact.whatsapp}</span>
+              </a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</MainLayout>

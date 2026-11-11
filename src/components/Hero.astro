@@ -1,0 +1,374 @@
+---
+import { Image } from "astro:assets";
+import {
+  ArrowRight,
+  FileSearch,
+  FileCheck2,
+  ShieldAlert,
+  BookOpenCheck,
+  Search,
+  CheckCircle2,
+  Building2,
+} from "./icons";
+import gedungBmti from "../assets/images/hero/gedung-bmti.jpg";
+import ppidHero from "../assets/images/hero/ppid-hero.jpg";
+import kegiatanBmti from "../assets/images/galeri/pelatihan-kurikulum-pm-guru.jpg";
+
+const heroSlides = [
+  {
+    image: gedungBmti,
+    alt: "Gedung Utama BBPPMPV BMTI Kementerian Pendidikan Dasar dan Menengah di Cimahi",
+    caption: "Gedung Utama BBPPMPV BMTI — Jl. Pesantren KM 2, Cibabat, Cimahi Utara",
+  },
+  {
+    image: ppidHero,
+    alt: "Kawasan Kampus dan Fasilitas BBPPMPV BMTI dari Udara",
+    caption: "Kawasan Kampus Pelayanan & Pengembangan Penjaminan Mutu Pendidikan Vokasi BMTI",
+  },
+  {
+    image: kegiatanBmti,
+    alt: "Kegiatan Pelatihan dan Pelayanan Publik di Lingkungan BBPPMPV BMTI",
+    caption: "Komitmen Pelayanan Prima Zona Integritas WBK / WBBM BBPPMPV BMTI",
+  },
+];
+
+const quickLinks = [
+  {
+    title: "Daftar Informasi Publik",
+    subtitle: "Dokumen DIP Resmi & Berkala",
+    href: "/informasi-publik/daftar-informasi-publik",
+    icon: FileSearch,
+    badge: "DIP",
+  },
+  {
+    title: "Permohonan Informasi",
+    subtitle: "Formulir Online & Offline",
+    href: "/layanan-informasi/formulir-permintaan-informasi",
+    icon: FileCheck2,
+    badge: "Layanan",
+  },
+  {
+    title: "Pengajuan Keberatan",
+    subtitle: "Prosedur & Formulir Keberatan",
+    href: "/layanan-informasi/formulir-keberatan-informasi",
+    icon: ShieldAlert,
+    badge: "Keberatan",
+  },
+  {
+    title: "Regulasi & POS PPID",
+    subtitle: "UU KIP No. 14/2008 & Standar",
+    href: "/informasi-publik/regulasi",
+    icon: BookOpenCheck,
+    badge: "Regulasi",
+  },
+];
+---
+
+<section
+  class="relative overflow-hidden bg-[#07192F] text-white"
+  aria-label="Hero Pejabat Pengelola Informasi dan Dokumentasi BBPPMPV BMTI"
+>
+  <!-- Background Image Slider with Gradient Overlay -->
+  <div class="absolute inset-0 z-0">
+    {
+      heroSlides.map((slide, index) => (
+        <div
+          data-hero-slide={index}
+          class:list={[
+            "absolute inset-0 transition-opacity duration-1000 ease-in-out",
+            index === 0 ? "opacity-100" : "opacity-0 pointer-events-none",
+          ]}
+        >
+          <Image
+            src={slide.image}
+            alt={slide.alt}
+            widths={[640, 1024, 1600]}
+            sizes="100vw"
+            loading={index === 0 ? "eager" : "lazy"}
+            class="w-full h-full object-cover object-center scale-105 transition-transform duration-[8000ms] ease-out"
+          />
+        </div>
+      ))
+    }
+    <!-- Multi-layer Corporate Gradient Overlay (Navy Blue & Gold Accent) -->
+    <div
+      class="absolute inset-0 bg-gradient-to-r from-[#07192F]/95 via-[#123B68]/88 to-[#123B68]/65"
+    >
+    </div>
+    <div
+      class="absolute inset-0 bg-gradient-to-t from-[#07192F] via-transparent to-[#07192F]/40"
+    >
+    </div>
+  </div>
+
+  <!-- Main Hero Content -->
+  <div class="container-corporate relative z-10 pt-14 pb-28 sm:pt-20 sm:pb-32 lg:pt-24 lg:pb-36">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+      <!-- Left Column: Headline, Subtitle, CTAs -->
+      <div class="lg:col-span-8 space-y-6">
+        <!-- Institution Badge -->
+        <div class="animate-hero-1 inline-flex flex-wrap items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20">
+          <span class="px-2 py-0.5 text-[11px] font-extrabold uppercase tracking-wider bg-[#E5B84B] text-[#07192F] rounded-full">
+            Portal Resmi PPID
+          </span>
+          <span class="text-xs sm:text-sm font-medium text-slate-100">
+            BBPPMPV Bidang Mesin dan Teknik Industri · Kemendikdasmen
+          </span>
+        </div>
+
+        <!-- Main Title as Required -->
+        <h1 class="animate-hero-2 text-3xl sm:text-5xl lg:text-[3.35rem] font-extrabold tracking-tight text-white leading-[1.12]">
+          Pejabat Pengelola Informasi dan{" "}
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#E5B84B] via-[#F7D774] to-[#E5B84B]">
+            Dokumentasi
+          </span>
+        </h1>
+
+        <!-- Subtitle Explaining Public Information Openness -->
+        <p class="animate-hero-3 text-base sm:text-lg lg:text-xl text-slate-200 max-w-2xl leading-relaxed font-normal">
+          Wujud komitmen{" "}
+          <strong class="text-white font-semibold">BBPPMPV BMTI Kementerian Pendidikan Dasar dan Menengah</strong>{" "}
+          dalam menyelenggarakan layanan keterbukaan informasi publik yang{" "}
+          <span class="text-[#E5B84B] font-semibold">
+            Adil, Transparan, Responsif, Independen, dan Akuntabel (ATRIA)
+          </span>{" "}
+          sesuai amanat Undang-Undang Nomor 14 Tahun 2008.
+        </p>
+
+        <!-- Quick Search Bar in Hero + Primary CTA Buttons -->
+        <div class="animate-hero-4 space-y-5 pt-2">
+          <!-- Interactive Search Trigger Bar -->
+          <div class="max-w-xl bg-white/12 backdrop-blur-md p-1.5 rounded-xl border border-white/25 flex items-center gap-2 shadow-xl">
+            <div class="pl-3 text-[#E5B84B]">
+              <Search class="w-5 h-5" />
+            </div>
+            <input
+              type="text"
+              id="hero-search-input"
+              placeholder="Cari Daftar Informasi Publik, LHKPN, RKAKL, Regulasi, atau Formulir..."
+              class="w-full bg-transparent text-white placeholder-slate-300 text-sm focus:outline-none py-2"
+              aria-label="Cari informasi publik"
+            />
+            <button
+              type="button"
+              id="hero-search-btn"
+              class="px-4 py-2.5 bg-[#E5B84B] hover:bg-[#D4A437] text-[#07192F] font-bold text-xs sm:text-sm rounded-lg transition-colors shrink-0 cursor-pointer"
+            >
+              Cari Informasi
+            </button>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="flex flex-wrap items-center gap-3.5">
+            <a href="/layanan-informasi" class="btn-accent">
+              <span>Layanan Informasi Publik</span>
+              <ArrowRight class="w-4 h-4" />
+            </a>
+            <a href="/informasi-publik" class="btn-outline-light">
+              <FileSearch class="w-4 h-4 text-[#E5B84B]" />
+              <span>Jelajahi Informasi Publik</span>
+            </a>
+            <a
+              href="/layanan-informasi/prosedur-permintaan-informasi"
+              class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-slate-200 hover:text-[#E5B84B] px-2 py-2 transition-colors"
+            >
+              <span>Prosedur Permohonan</span>
+              <ArrowRight class="w-3.5 h-3.5" />
+            </a>
+          </div>
+        </div>
+
+        <!-- Key Highlights / Service Standards Badges -->
+        <div class="animate-hero-4 pt-3 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs sm:text-sm text-slate-200 border-t border-white/15">
+          <div class="flex items-center gap-2">
+            <CheckCircle2 class="w-4 h-4 text-[#E5B84B] shrink-0" />
+            <span>Pelayanan Terpusat Satu Pintu (ULP)</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <CheckCircle2 class="w-4 h-4 text-[#E5B84B] shrink-0" />
+            <span>Jangka Waktu 10 + 7 Hari Kerja (UU 14/2008)</span>
+          </div>
+          <div class="flex items-center gap-2">
+            <CheckCircle2 class="w-4 h-4 text-[#E5B84B] shrink-0" />
+            <span>Tidak Dipungut Biaya (Gratis)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Corporate Highlight Card & Slide Switcher -->
+      <div class="lg:col-span-4 animate-hero-4">
+        <div class="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-6 shadow-2xl space-y-5">
+          <div class="flex items-center justify-between border-b border-white/15 pb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-xl bg-[#E5B84B] text-[#07192F] flex items-center justify-center font-bold">
+                <Building2 class="w-5 h-5" />
+              </div>
+              <div>
+                <p class="text-xs uppercase tracking-wider text-[#E5B84B] font-bold">
+                  Unit Layanan Publik
+                </p>
+                <h2 class="text-sm font-bold text-white">PPID BBPPMPV BMTI</h2>
+              </div>
+            </div>
+            <span class="px-2.5 py-1 rounded-full text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
+              Cepat · Tepat · Efisien
+            </span>
+          </div>
+
+          <div class="space-y-3 text-xs sm:text-sm text-slate-200">
+            <p class="leading-relaxed">
+              Dikelola secara terpusat satu pintu oleh <strong>Kepala Bagian Tata Usaha BBPPMPV BMTI</strong> di bawah Penanggung Jawab Hubungan Masyarakat dan Pelayanan Publik.
+            </p>
+            <div class="bg-[#07192F]/60 rounded-xl p-3.5 border border-white/10 space-y-2">
+              <div class="flex justify-between text-xs">
+                <span class="text-slate-400">Pendaftaran:</span>
+                <span class="font-semibold text-[#E5B84B]">08.00 – 11.00 WIB</span>
+              </div>
+              <div class="flex justify-between text-xs">
+                <span class="text-slate-400">Senin – Kamis:</span>
+                <span class="font-semibold text-white">09.00 – 15.00 WIB</span>
+              </div>
+              <div class="flex justify-between text-xs">
+                <span class="text-slate-400">Jumat:</span>
+                <span class="font-semibold text-white">09.00 – 15.30 WIB</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slide Indicator & Caption -->
+          <div class="pt-2 border-t border-white/15 flex items-center justify-between gap-2">
+            <p id="hero-slide-caption" class="text-[11px] text-slate-300 truncate">
+              {heroSlides[0].caption}
+            </p>
+            <div class="flex items-center gap-1.5 shrink-0" role="tablist" aria-label="Pilih foto latar">
+              {
+                heroSlides.map((slide, idx) => (
+                  <button
+                    type="button"
+                    data-hero-dot={idx}
+                    data-caption={slide.caption}
+                    aria-label={`Tampilkan foto ${idx + 1}`}
+                    class:list={[
+                      "h-2 rounded-full transition-all duration-300 cursor-pointer",
+                      idx === 0 ? "w-6 bg-[#E5B84B]" : "w-2 bg-white/40 hover:bg-white/70",
+                    ]}
+                  />
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Docked Corporate Quick Access Strip (Pertamina Inspired) -->
+  <div class="relative z-20 -mt-12 sm:-mt-16 pb-6">
+    <div class="container-corporate">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {
+          quickLinks.map((item) => {
+            const Icon = item.icon;
+            return (
+              <a
+                href={item.href}
+                class="group bg-white hover:bg-[#123B68] text-slate-800 hover:text-white rounded-xl p-4 sm:p-5 shadow-xl border border-slate-200/80 hover:border-[#1769AA] transition-all duration-300 flex items-center justify-between gap-4 hover:-translate-y-1"
+              >
+                <div class="flex items-center gap-3.5 min-w-0">
+                  <div class="w-12 h-12 rounded-xl bg-[#F5F7FA] group-hover:bg-white/15 text-[#123B68] group-hover:text-[#E5B84B] flex items-center justify-center shrink-0 transition-colors">
+                    <Icon class="w-6 h-6" />
+                  </div>
+                  <div class="min-w-0">
+                    <span class="inline-block text-[10px] font-extrabold uppercase tracking-wider text-[#1769AA] group-hover:text-[#E5B84B]">
+                      {item.badge}
+                    </span>
+                    <h3 class="text-sm sm:text-base font-bold text-[#123B68] group-hover:text-white truncate">
+                      {item.title}
+                    </h3>
+                    <p class="text-xs text-slate-500 group-hover:text-slate-200 truncate">
+                      {item.subtitle}
+                    </p>
+                  </div>
+                </div>
+                <ArrowRight class="w-4 h-4 text-slate-400 group-hover:text-[#E5B84B] group-hover:translate-x-1 transition-all shrink-0" />
+              </a>
+            );
+          })
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  function initHero() {
+    const slides = document.querySelectorAll<HTMLElement>("[data-hero-slide]");
+    const dots = document.querySelectorAll<HTMLElement>("[data-hero-dot]");
+    const captionEl = document.getElementById("hero-slide-caption");
+    let current = 0;
+
+    const showSlide = (idx: number) => {
+      current = idx;
+      slides.forEach((s, i) => {
+        if (i === idx) {
+          s.classList.remove("opacity-0", "pointer-events-none");
+          s.classList.add("opacity-100");
+        } else {
+          s.classList.add("opacity-0", "pointer-events-none");
+          s.classList.remove("opacity-100");
+        }
+      });
+
+      dots.forEach((d, i) => {
+        if (i === idx) {
+          d.classList.remove("w-2", "bg-white/40");
+          d.classList.add("w-6", "bg-[#E5B84B]");
+          if (captionEl) {
+            captionEl.textContent = d.getAttribute("data-caption") || "";
+          }
+        } else {
+          d.classList.remove("w-6", "bg-[#E5B84B]");
+          d.classList.add("w-2", "bg-white/40");
+        }
+      });
+    };
+
+    dots.forEach((dot, idx) => {
+      dot.addEventListener("click", () => showSlide(idx));
+    });
+
+    if (slides.length > 1) {
+      setInterval(() => {
+        showSlide((current + 1) % slides.length);
+      }, 6500);
+    }
+
+    // Hero search bar opens the global search modal with the typed query
+    const heroInput = document.getElementById("hero-search-input") as HTMLInputElement | null;
+    const heroBtn = document.getElementById("hero-search-btn");
+    const globalModal = document.getElementById("search-modal");
+    const globalInput = document.getElementById("global-search-input") as HTMLInputElement | null;
+
+    const triggerHeroSearch = () => {
+      const q = heroInput?.value || "";
+      if (globalModal && globalInput) {
+        globalModal.classList.remove("hidden");
+        globalModal.classList.add("flex");
+        document.body.style.overflow = "hidden";
+        globalInput.value = q;
+        globalInput.dispatchEvent(new Event("input"));
+        setTimeout(() => globalInput.focus(), 50);
+      }
+    };
+
+    heroBtn?.addEventListener("click", triggerHeroSearch);
+    heroInput?.addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        e.preventDefault();
+        triggerHeroSearch();
+      }
+    });
+  }
+
+  initHero();
+</script>

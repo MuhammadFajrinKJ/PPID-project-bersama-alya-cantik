@@ -1,0 +1,492 @@
+---
+import { Image } from "astro:assets";
+import {
+  FileText,
+  FolderOpen,
+  FileSpreadsheet,
+  Globe,
+  ClipboardList,
+  ExternalLink,
+  Clock,
+  Info,
+  CheckCircle2,
+  MapPin,
+  Phone,
+  Mail,
+  MessageCircle,
+  GraduationCap,
+  Briefcase,
+  ArrowRight,
+} from "./icons";
+import type { Block } from "../data/pages";
+import { getAssetImage } from "../utils/images";
+import { siteConfig, navMenu } from "../data/site";
+
+interface Props {
+  blocks: Block[];
+  slug?: string;
+}
+
+const { blocks, slug = "" } = Astro.props;
+
+// Resolve child links if block.type === "children"
+function getChildrenForSlug(currentSlug: string) {
+  const path = `/${currentSlug}`;
+  for (const top of navMenu) {
+    if (top.href === path && top.children) {
+      return top.children;
+    }
+    if (top.children) {
+      for (const sub of top.children) {
+        if (sub.href === path && sub.children) {
+          return sub.children;
+        }
+      }
+    }
+  }
+  return [];
+}
+
+const childLinks = getChildrenForSlug(slug);
+---
+
+<div class="space-y-8">
+  {
+    blocks.map((block) => {
+      if (block.type === "heading") {
+        return (
+          <div class="pt-2">
+            {block.eyebrow && <span class="section-eyebrow">{block.eyebrow}</span>}
+            <h2 class="text-xl sm:text-2xl font-extrabold text-[#123B68] leading-snug">
+              {block.text}
+            </h2>
+          </div>
+        );
+      }
+
+      if (block.type === "text") {
+        return (
+          <div
+            class="prose-ppid text-sm sm:text-base text-slate-700 leading-relaxed bg-white p-5 sm:p-6 rounded-xl border border-slate-200/80 shadow-xs"
+            set:html={block.html}
+          />
+        );
+      }
+
+      if (block.type === "notice") {
+        return (
+          <div class="p-5 rounded-xl bg-amber-50/90 border border-amber-200 text-amber-950 flex items-start gap-3.5">
+            <Info class="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+            <div class="text-xs sm:text-sm leading-relaxed prose-ppid" set:html={block.html} />
+          </div>
+        );
+      }
+
+      if (block.type === "list") {
+        return (
+          <div class="card-corporate p-6 sm:p-7 bg-white">
+            {block.title && (
+              <h3 class="text-base sm:text-lg font-extrabold text-[#123B68] mb-4 pb-3 border-b border-slate-100">
+                {block.title}
+              </h3>
+            )}
+            {block.ordered ? (
+              <ol class="space-y-3">
+                {block.items.map((item, idx) => (
+                  <li class="flex items-start gap-3.5 text-sm sm:text-base text-slate-700">
+                    <span class="w-6 h-6 rounded-full bg-[#123B68] text-[#E5B84B] font-bold text-xs flex items-center justify-center shrink-0 mt-0.5">
+                      {idx + 1}
+                    </span>
+                    <span class="leading-relaxed" set:html={item} />
+                  </li>
+                ))}
+              </ol>
+            ) : (
+              <ul class="space-y-3">
+                {block.items.map((item) => (
+                  <li class="flex items-start gap-3 text-sm sm:text-base text-slate-700">
+                    <CheckCircle2 class="w-4 h-4 text-[#1769AA] shrink-0 mt-1" />
+                    <span class="leading-relaxed" set:html={item} />
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        );
+      }
+
+      if (block.type === "steps") {
+        return (
+          <div class="card-corporate p-6 sm:p-8 bg-white">
+            {block.title && (
+              <h3 class="text-lg sm:text-xl font-extrabold text-[#123B68] mb-5 pb-3 border-b border-slate-100">
+                {block.title}
+              </h3>
+            )}
+            <ol class="space-y-4">
+              {block.items.map((stepHtml, idx) => (
+                <li class="flex items-start gap-4 p-4 rounded-xl bg-[#F5F7FA] border border-slate-200/70">
+                  <span class="w-8 h-8 rounded-xl bg-[#123B68] text-[#E5B84B] font-extrabold text-sm flex items-center justify-center shrink-0">
+                    {idx + 1}
+                  </span>
+                  <div
+                    class="prose-ppid text-sm sm:text-base text-slate-700 leading-relaxed flex-1"
+                    set:html={stepHtml}
+                  />
+                </li>
+              ))}
+            </ol>
+          </div>
+        );
+      }
+
+      if (block.type === "schedule") {
+        return (
+          <div class="card-corporate overflow-hidden bg-white">
+            <div class="p-4 sm:p-5 bg-[#123B68] text-white flex items-center gap-2.5">
+              <Clock class="w-5 h-5 text-[#E5B84B]" />
+              <h3 class="text-base sm:text-lg font-bold">{block.title}</h3>
+            </div>
+            <div class="divide-y divide-slate-100">
+              {block.rows.map((row) => (
+                <div class="p-4 sm:px-6 flex flex-col sm:flex-row sm:items-center justify-between gap-1 hover:bg-[#F5F7FA] transition-colors">
+                  <span class="text-sm font-bold text-[#123B68]">{row.label}</span>
+                  <span class="text-sm font-medium text-slate-700 bg-slate-100 px-3 py-1 rounded-lg self-start sm:self-auto">
+                    {row.value}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      }
+
+      if (block.type === "docs") {
+        return (
+          <div class="space-y-3">
+            {block.title && (
+              <h3 class="text-base sm:text-lg font-extrabold text-[#123B68]">{block.title}</h3>
+            )}
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {block.items.map((doc) => {
+                const isExternal = doc.href?.startsWith("http");
+                return (
+                  <div class="card-corporate p-5 flex items-start justify-between gap-4 bg-white">
+                    <div class="flex items-start gap-3.5 min-w-0">
+                      <div class="w-11 h-11 rounded-xl bg-[#123B68]/8 text-[#123B68] flex items-center justify-center shrink-0">
+                        {doc.kind === "folder" ? (
+                          <FolderOpen class="w-5 h-5 text-[#1769AA]" />
+                        ) : doc.kind === "sheet" ? (
+                          <FileSpreadsheet class="w-5 h-5 text-emerald-600" />
+                        ) : doc.kind === "form" ? (
+                          <ClipboardList class="w-5 h-5 text-[#E5B84B]" />
+                        ) : doc.kind === "web" ? (
+                          <Globe class="w-5 h-5 text-[#1769AA]" />
+                        ) : (
+                          <FileText class="w-5 h-5 text-[#123B68]" />
+                        )}
+                      </div>
+                      <div class="min-w-0">
+                        {doc.category && (
+                          <span class="inline-block px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-[#F5F7FA] text-[#1769AA] border border-slate-200 mb-1">
+                            {doc.category}
+                          </span>
+                        )}
+                        <h4 class="text-sm sm:text-base font-bold text-[#123B68] leading-snug">
+                          {doc.title}
+                        </h4>
+                        {doc.description && (
+                          <p class="text-xs text-slate-500 mt-1">{doc.description}</p>
+                        )}
+                      </div>
+                    </div>
+
+                    {doc.href ? (
+                      <a
+                        href={doc.href}
+                        target={isExternal ? "_blank" : undefined}
+                        rel={isExternal ? "noopener noreferrer" : undefined}
+                        class="px-3.5 py-2 rounded-lg bg-[#123B68] hover:bg-[#1769AA] text-white text-xs font-bold inline-flex items-center gap-1.5 shrink-0 transition-colors"
+                      >
+                        <span>Buka</span>
+                        {isExternal ? (
+                          <ExternalLink class="w-3.5 h-3.5 text-[#E5B84B]" />
+                        ) : (
+                          <ArrowRight class="w-3.5 h-3.5 text-[#E5B84B]" />
+                        )}
+                      </a>
+                    ) : (
+                      <span class="px-2.5 py-1 rounded bg-slate-100 text-slate-400 text-[11px] font-semibold shrink-0">
+                        Belum Ditautkan
+                      </span>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        );
+      }
+
+      if (block.type === "yearDocs") {
+        return (
+          <div class="space-y-6">
+            {block.groups.map((grp) => (
+              <div class="card-corporate overflow-hidden bg-white">
+                <div class="px-5 py-3.5 bg-[#123B68] text-white flex items-center justify-between">
+                  <h3 class="text-base font-extrabold flex items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded bg-[#E5B84B] text-[#07192F] text-xs font-black">
+                      Tahun {grp.year}
+                    </span>
+                    <span>Dokumen Pengadaan Barang/Jasa</span>
+                  </h3>
+                  <span class="text-xs text-slate-300">{grp.items.length} Paket</span>
+                </div>
+                <div class="divide-y divide-slate-100">
+                  {grp.items.map((doc) => (
+                    <div class="p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 hover:bg-[#F5F7FA] transition-colors">
+                      <div class="flex items-start gap-3">
+                        <FileText class="w-5 h-5 text-[#1769AA] shrink-0 mt-0.5" />
+                        <span class="text-sm font-bold text-slate-800 leading-snug">
+                          {doc.title}
+                        </span>
+                      </div>
+                      {doc.href && (
+                        <a
+                          href={doc.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          class="px-3.5 py-2 rounded-lg bg-[#123B68] hover:bg-[#1769AA] text-white text-xs font-bold inline-flex items-center gap-1.5 self-start sm:self-auto shrink-0 transition-colors"
+                        >
+                          <span>Lihat Dokumen</span>
+                          <ExternalLink class="w-3.5 h-3.5 text-[#E5B84B]" />
+                        </a>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        );
+      }
+
+      if (block.type === "embed") {
+        return (
+          <div class="card-corporate overflow-hidden bg-white">
+            <div class="px-5 py-3.5 bg-[#F5F7FA] border-b border-slate-200 flex items-center justify-between gap-3">
+              <div class="flex items-center gap-2 min-w-0">
+                <FileText class="w-4 h-4 text-[#1769AA] shrink-0" />
+                <h3 class="text-sm font-bold text-[#123B68] truncate">{block.title}</h3>
+              </div>
+              {block.href && (
+                <a
+                  href={block.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="text-xs font-bold text-[#1769AA] hover:text-[#123B68] inline-flex items-center gap-1 shrink-0"
+                >
+                  <span>Buka di Tab Baru</span>
+                  <ExternalLink class="w-3.5 h-3.5" />
+                </a>
+              )}
+            </div>
+            <div class="w-full h-[480px] sm:h-[600px] bg-slate-100">
+              <iframe
+                src={block.src}
+                title={block.title}
+                loading="lazy"
+                class="w-full h-full border-0"
+                allow="autoplay"
+              />
+            </div>
+          </div>
+        );
+      }
+
+      if (block.type === "images") {
+        const gridClass =
+          block.layout === "portrait"
+            ? "grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5"
+            : block.layout === "gallery"
+            ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5"
+            : "grid grid-cols-1 gap-6";
+
+        return (
+          <div class={gridClass}>
+            {block.images.map((imgItem) => {
+              const assetImg = getAssetImage(imgItem.src);
+              const content = (
+                <figure class="card-corporate overflow-hidden bg-white flex flex-col justify-between h-full group">
+                  <div class="p-3 bg-[#F5F7FA] flex items-center justify-center img-zoom-wrap">
+                    {assetImg ? (
+                      <Image
+                        src={assetImg}
+                        alt={imgItem.alt}
+                        widths={[400, 900]}
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        class:list={[
+                          "w-full h-auto object-contain rounded-lg",
+                          block.layout === "portrait" ? "max-h-72" : block.layout === "gallery" ? "h-56 object-cover" : "max-h-[680px]",
+                        ]}
+                      />
+                    ) : (
+                      <div class="py-12 text-xs text-slate-400">{imgItem.alt}</div>
+                    )}
+                  </div>
+                  {(imgItem.caption || imgItem.alt) && (
+                    <figcaption class="p-3.5 border-t border-slate-100 text-xs sm:text-sm font-bold text-[#123B68] text-center">
+                      {imgItem.caption || imgItem.alt}
+                    </figcaption>
+                  )}
+                </figure>
+              );
+
+              return imgItem.href ? (
+                <a href={imgItem.href} target="_blank" rel="noopener noreferrer" class="block h-full">
+                  {content}
+                </a>
+              ) : (
+                content
+              );
+            })}
+          </div>
+        );
+      }
+
+      if (block.type === "profile") {
+        const photoAsset = getAssetImage(block.photo);
+        return (
+          <div class="card-corporate overflow-hidden bg-white">
+            <div class="h-2 bg-gradient-to-r from-[#123B68] via-[#1769AA] to-[#E5B84B]" />
+            <div class="p-6 sm:p-8 grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+              <div class="md:col-span-3 flex flex-col items-center text-center">
+                {photoAsset && (
+                  <Image
+                    src={photoAsset}
+                    alt={block.name}
+                    width={220}
+                    height={280}
+                    class="w-40 h-48 object-cover object-top rounded-2xl shadow-lg border-2 border-[#E5B84B]"
+                  />
+                )}
+                <h3 class="text-base font-extrabold text-[#123B68] mt-3">{block.name}</h3>
+                <p class="text-xs text-[#1769AA] font-semibold mt-1">{block.position}</p>
+              </div>
+
+              <div class="md:col-span-9 space-y-5">
+                <div class="p-4 rounded-xl bg-[#F5F7FA] border border-slate-200/80 text-xs sm:text-sm">
+                  <span class="font-bold text-[#123B68] block mb-1">Alamat Kedinasan:</span>
+                  <span class="text-slate-600">{block.address}</span>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                  <div>
+                    <h4 class="text-xs font-extrabold uppercase tracking-wider text-[#1769AA] flex items-center gap-1.5 mb-2.5">
+                      <GraduationCap class="w-4 h-4" />
+                      <span>Riwayat Pendidikan</span>
+                    </h4>
+                    <ul class="space-y-2 text-xs sm:text-sm text-slate-700">
+                      {block.education.map((edu) => (
+                        <li class="flex items-start gap-2">
+                          <span class="w-1.5 h-1.5 rounded-full bg-[#E5B84B] mt-2 shrink-0" />
+                          <span>{edu}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h4 class="text-xs font-extrabold uppercase tracking-wider text-[#1769AA] flex items-center gap-1.5 mb-2.5">
+                      <Briefcase class="w-4 h-4" />
+                      <span>Riwayat Jabatan / Pekerjaan</span>
+                    </h4>
+                    <ul class="space-y-2 text-xs sm:text-sm text-slate-700">
+                      {block.experience.map((exp) => (
+                        <li class="border-l-2 border-[#1769AA]/30 pl-3 py-0.5">
+                          <span class="text-[11px] font-bold text-[#123B68] block">
+                            {exp.period}
+                          </span>
+                          <span class="text-slate-600">{exp.role}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      }
+
+      if (block.type === "contact") {
+        return (
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="card-corporate p-5 bg-[#F5F7FA]">
+              <MapPin class="w-5 h-5 text-[#1769AA] mb-2" />
+              <h4 class="text-sm font-bold text-[#123B68]">Unit Layanan Publik (ULP)</h4>
+              <p class="text-xs text-slate-600 mt-1 leading-relaxed">
+                {siteConfig.contact.address}
+              </p>
+            </div>
+            <div class="card-corporate p-5 bg-[#F5F7FA]">
+              <Phone class="w-5 h-5 text-[#1769AA] mb-2" />
+              <h4 class="text-sm font-bold text-[#123B68]">Telepon & WhatsApp</h4>
+              <p class="text-xs text-slate-600 mt-1">
+                Telepon: <a href={siteConfig.contact.phoneHref} class="font-bold text-[#123B68]">{siteConfig.contact.phone}</a>
+              </p>
+              <p class="text-xs text-slate-600 mt-0.5">
+                WhatsApp:{" "}
+                <a href={siteConfig.contact.whatsappHref} target="_blank" rel="noopener noreferrer" class="font-bold text-[#1769AA]">
+                  {siteConfig.contact.whatsapp}
+                </a>
+              </p>
+            </div>
+            <div class="card-corporate p-5 bg-[#F5F7FA]">
+              <Mail class="w-5 h-5 text-[#1769AA] mb-2" />
+              <h4 class="text-sm font-bold text-[#123B68]">Surat Elektronik Resmi</h4>
+              <p class="text-xs text-slate-600 mt-1 break-all">
+                <a href={`mailto:${siteConfig.contact.email}`} class="font-bold text-[#1769AA]">
+                  {siteConfig.contact.email}
+                </a>
+              </p>
+            </div>
+          </div>
+        );
+      }
+
+      if (block.type === "children" && childLinks.length > 0) {
+        return (
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {childLinks.map((child) => (
+              <a
+                href={child.href}
+                target={child.external ? "_blank" : undefined}
+                rel={child.external ? "noopener noreferrer" : undefined}
+                class="card-corporate p-5 flex items-center justify-between gap-4 group bg-white"
+              >
+                <div>
+                  <span class="text-[10px] font-bold uppercase tracking-wider text-[#1769AA]">
+                    Sub-Halaman Resmi
+                  </span>
+                  <h4 class="text-base font-bold text-[#123B68] group-hover:text-[#1769AA] mt-0.5">
+                    {child.label}
+                  </h4>
+                </div>
+                <div class="w-9 h-9 rounded-lg bg-[#F5F7FA] group-hover:bg-[#123B68] text-[#123B68] group-hover:text-[#E5B84B] flex items-center justify-center shrink-0 transition-colors">
+                  {child.external ? (
+                    <ExternalLink class="w-4 h-4" />
+                  ) : (
+                    <ArrowRight class="w-4 h-4" />
+                  )}
+                </div>
+              </a>
+            ))}
+          </div>
+        );
+      }
+
+      return null;
+    })
+  }
+</div>

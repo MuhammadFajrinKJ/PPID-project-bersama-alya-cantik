@@ -1,0 +1,229 @@
+---
+import { Image } from "astro:assets";
+import {
+  Calendar,
+  ArrowUpRight,
+  ArrowRight,
+  Newspaper,
+  BookOpen,
+  Images,
+  ExternalLink,
+} from "./icons";
+import { newsArticles } from "../data/site";
+import { getAssetImage } from "../utils/images";
+import swara1 from "../assets/images/publikasi/majalah-swara-1.png";
+import swara2 from "../assets/images/publikasi/majalah-swara-2.png";
+import swara3 from "../assets/images/publikasi/majalah-swara-3.png";
+
+const featuredNews = newsArticles[0];
+const otherNews = newsArticles.slice(1, 6);
+const featuredImage = getAssetImage(featuredNews.image);
+---
+
+<section id="berita-publikasi" class="py-20 sm:py-24 bg-white relative">
+  <div class="container-corporate">
+    <!-- Section Heading -->
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 reveal">
+      <div class="max-w-2xl">
+        <span class="section-eyebrow">Media, Berita & Publikasi</span>
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#123B68] tracking-tight">
+          Berita & Informasi Terbaru
+        </h2>
+        <p class="mt-3 text-slate-600 text-sm sm:text-base leading-relaxed">
+          Liputan kegiatan kelembagaan, pengumuman kediklatan vokasi, kepegawaian, serta publikasi resmi Majalah Swara dan Galeri Dokumentasi BBPPMPV BMTI Kemendikdasmen.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <a
+          href="/publikasi"
+          class="btn-outline-navy !py-2.5 !px-4 !text-xs sm:!text-sm"
+        >
+          <BookOpen class="w-4 h-4" />
+          <span>Majalah Swara & Galeri</span>
+        </a>
+        <a
+          href="https://bbppmpvbmti.kemendikdasmen.go.id/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-primary !py-2.5 !px-4 !text-xs sm:!text-sm"
+        >
+          <Newspaper class="w-4 h-4 text-[#E5B84B]" />
+          <span>Portal Berita BBPPMPV BMTI</span>
+          <ExternalLink class="w-3.5 h-3.5" />
+        </a>
+      </div>
+    </div>
+
+    <!-- Corporate News Grid (Pertamina Newsroom Style: 1 Large Featured + Grid Cards) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-7 mb-14">
+      <!-- Featured Article Left (5 cols) -->
+      <article class="lg:col-span-5 card-corporate overflow-hidden flex flex-col justify-between group reveal">
+        <div>
+          <a
+            href={featuredNews.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block relative h-64 sm:h-72 img-zoom-wrap bg-slate-900"
+          >
+            {
+              featuredImage && (
+                <Image
+                  src={featuredImage}
+                  alt={featuredNews.title}
+                  widths={[480, 768]}
+                  sizes="(max-width: 1024px) 100vw, 45vw"
+                  class="w-full h-full object-cover"
+                />
+              )
+            }
+            <div class="absolute inset-0 bg-gradient-to-t from-[#07192F]/80 via-transparent to-transparent" />
+            <span class="absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-bold bg-[#E5B84B] text-[#07192F] shadow">
+              {featuredNews.category}
+            </span>
+          </a>
+
+          <div class="p-6">
+            <div class="flex items-center gap-2 text-xs text-slate-500 font-medium mb-2.5">
+              <Calendar class="w-3.5 h-3.5 text-[#1769AA]" />
+              <time>{featuredNews.date}</time>
+              <span>·</span>
+              <span>BBPPMPV BMTI</span>
+            </div>
+
+            <h3 class="text-lg sm:text-xl font-extrabold text-[#123B68] group-hover:text-[#1769AA] transition-colors leading-snug">
+              <a href={featuredNews.href} target="_blank" rel="noopener noreferrer">
+                {featuredNews.title}
+              </a>
+            </h3>
+
+            <p class="text-sm text-slate-600 mt-3 leading-relaxed">
+              {featuredNews.summary}
+            </p>
+          </div>
+        </div>
+
+        <div class="px-6 pb-6 pt-3 border-t border-slate-100 flex items-center justify-between">
+          <a
+            href={featuredNews.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#123B68] group-hover:text-[#1769AA]"
+          >
+            <span>Baca Selengkapnya</span>
+            <ArrowUpRight class="w-4 h-4 text-[#E5B84B]" />
+          </a>
+          <span class="text-[11px] text-slate-400">bbppmpvbmti.kemendikdasmen.go.id</span>
+        </div>
+      </article>
+
+      <!-- Secondary News Cards Right (7 cols) -->
+      <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-5 reveal reveal-delay-1">
+        {
+          otherNews.slice(0, 4).map((item) => {
+            const thumb = getAssetImage(item.image);
+            return (
+              <article class="card-corporate overflow-hidden flex flex-col justify-between group">
+                <div>
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="block relative h-44 img-zoom-wrap bg-slate-900"
+                  >
+                    {thumb && (
+                      <Image
+                        src={thumb}
+                        alt={item.title}
+                        widths={[360, 560]}
+                        sizes="(max-width: 640px) 100vw, 35vw"
+                        class="w-full h-full object-cover"
+                      />
+                    )}
+                    <span class="absolute top-3 left-3 px-2.5 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-[#123B68]/90 text-[#E5B84B] backdrop-blur-sm">
+                      {item.category}
+                    </span>
+                  </a>
+
+                  <div class="p-4 sm:p-5">
+                    <div class="flex items-center gap-1.5 text-[11px] text-slate-500 font-medium mb-1.5">
+                      <Calendar class="w-3.5 h-3.5 text-[#1769AA]" />
+                      <time>{item.date}</time>
+                    </div>
+                    <h3 class="text-sm sm:text-base font-bold text-[#123B68] group-hover:text-[#1769AA] transition-colors line-clamp-2 leading-snug">
+                      <a href={item.href} target="_blank" rel="noopener noreferrer">
+                        {item.title}
+                      </a>
+                    </h3>
+                    <p class="text-xs text-slate-500 mt-2 line-clamp-2 leading-relaxed">
+                      {item.summary}
+                    </p>
+                  </div>
+                </div>
+
+                <div class="px-4 sm:px-5 pb-4 pt-2 border-t border-slate-100 flex items-center justify-between">
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-1 text-xs font-bold text-[#1769AA] group-hover:text-[#123B68]"
+                  >
+                    <span>Baca Selengkapnya</span>
+                    <ArrowUpRight class="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </article>
+            );
+          })
+        }
+      </div>
+    </div>
+
+    <!-- Publikasi Majalah Swara & Galeri Dokumentasi Showcase Banner -->
+    <div class="card-corporate p-6 sm:p-8 bg-gradient-to-r from-[#123B68] via-[#123B68] to-[#1769AA] text-white border-none reveal reveal-delay-2">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="lg:col-span-7 space-y-4">
+          <span class="section-eyebrow section-eyebrow-light">Publikasi Resmi PPID</span>
+          <h3 class="text-xl sm:text-2xl font-extrabold text-white">
+            Majalah Swara & Galeri Dokumentasi BBPPMPV BMTI
+          </h3>
+          <p class="text-xs sm:text-sm text-slate-200 leading-relaxed max-w-xl">
+            Telusuri edisi publikasi <strong>Majalah Swara</strong> serta dokumentasi visual kegiatan pelatihan, kerja sama industri, dan pelayanan publik di lingkungan BBPPMPV BMTI.
+          </p>
+          <div class="flex flex-wrap gap-3 pt-1">
+            <a href="/publikasi/majalah-swara" class="btn-accent !py-2.5 !px-4 !text-xs sm:!text-sm">
+              <BookOpen class="w-4 h-4" />
+              <span>Buka Majalah Swara</span>
+            </a>
+            <a
+              href="/publikasi/galeri-dokumentasi"
+              class="btn-outline-light !py-2.5 !px-4 !text-xs sm:!text-sm"
+            >
+              <Images class="w-4 h-4 text-[#E5B84B]" />
+              <span>Lihat Galeri Dokumentasi</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5 flex items-center justify-center lg:justify-end gap-3">
+          {
+            [swara1, swara2, swara3].map((cover, i) => (
+              <a
+                href="/publikasi/majalah-swara"
+                class="block w-24 sm:w-28 rounded-lg overflow-hidden shadow-xl border-2 border-white/20 hover:border-[#E5B84B] transition-all hover:-translate-y-1.5"
+              >
+                <Image
+                  src={cover}
+                  alt={`Sampul Majalah Swara Edisi ${i + 1}`}
+                  width={160}
+                  height={220}
+                  class="w-full h-36 sm:h-40 object-cover"
+                />
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

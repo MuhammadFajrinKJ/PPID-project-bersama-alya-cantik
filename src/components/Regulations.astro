@@ -1,0 +1,253 @@
+---
+import {
+  Scale,
+  FolderOpen,
+  FileText,
+  ExternalLink,
+  Download,
+  ArrowRight,
+  CheckCircle2,
+  FileSpreadsheet,
+} from "./icons";
+import { regulationsData } from "../data/site";
+
+const featuredOfficialDocs = [
+  {
+    title: "Daftar Informasi Publik (DIP) BBPPMPV BMTI",
+    category: "Daftar Informasi Publik",
+    description: "Dokumen resmi Daftar Informasi Publik yang dikelola oleh PPID BBPPMPV BMTI.",
+    href: "https://drive.google.com/file/d/1tbF4UmeVeaX7Qf-0ccToNFM6KG8LW2e7/view?usp=sharing",
+    pageHref: "/informasi-publik/daftar-informasi-publik",
+    type: "Google Drive File",
+  },
+  {
+    title: "Realisasi Pendapatan Per Akun Tahun 2025",
+    category: "Informasi Keuangan",
+    description: "Dokumen PDF Realisasi Pendapatan Per Akun 2025 pada portal resmi PPID BBPPMPV BMTI.",
+    href: "https://bbppmpvbmti.kemendikdasmen.go.id/Ppid/wp-content/uploads/2025/10/Realisasi-Pendapatan-Per-Akun-2025.pdf",
+    pageHref: "/informasi-publik/informasi-keuangan-lainnya",
+    type: "Dokumen PDF",
+  },
+  {
+    title: "Rekap Surat Keputusan Tahun 2026 & 2025",
+    category: "Keputusan & Kebijakan",
+    description: "Rekapitulasi Surat Keputusan resmi bagi publik tahun 2026 dan tahun 2025.",
+    href: "https://docs.google.com/spreadsheets/d/1cCAb24EnlZuhiSOxB1qoe47uhnQo2TpBUrzWJmTNbIg/edit?usp=sharing",
+    pageHref: "/informasi-publik/peraturan-keputusan-dan-kebijakan",
+    type: "Google Spreadsheet",
+  },
+  {
+    title: "Dokumen RKAKL dan DIPA BBPPMPV BMTI",
+    category: "Anggaran & DIPA",
+    description: "Folder dan dokumen Rencana Kerja dan Anggaran Kementerian/Lembaga (RKAKL) serta DIPA.",
+    href: "https://drive.google.com/drive/folders/1xx6tOXZIG26WhSx5DfXTuNMBpn7O8ev6?usp=drive_link",
+    pageHref: "/informasi-publik/rkakl-dan-dipa",
+    type: "Google Drive Folder",
+  },
+];
+---
+
+<section id="regulasi-dokumentasi" class="py-20 sm:py-24 bg-[#F5F7FA] relative">
+  <div class="container-corporate">
+    <!-- Section Header -->
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 reveal">
+      <div class="max-w-2xl">
+        <span class="section-eyebrow">Landasan Hukum & POS</span>
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#123B68] tracking-tight">
+          Regulasi dan Dokumentasi Resmi
+        </h2>
+        <p class="mt-3 text-slate-600 text-sm sm:text-base leading-relaxed">
+          Peraturan perundang-undangan keterbukaan informasi publik, Prosedur Operasional Standar (POS) PPID BBPPMPV BMTI, serta dokumen akuntabilitas publik yang dapat dilihat dan diunduh langsung.
+        </p>
+      </div>
+      <div>
+        <a
+          href="/informasi-publik/regulasi"
+          class="btn-primary !py-2.5 !px-5 !text-xs sm:!text-sm"
+        >
+          <span>Halaman Regulasi Lengkap</span>
+          <ArrowRight class="w-4 h-4" />
+        </a>
+      </div>
+    </div>
+
+    <!-- Two Columns: General Regulations & POS PPID -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+      <!-- Left: Regulasi Keterbukaan Informasi Publik (7 cols) -->
+      <div class="lg:col-span-7 space-y-4 reveal">
+        <div class="flex items-center justify-between pb-2 border-b border-slate-200">
+          <div class="flex items-center gap-2.5">
+            <Scale class="w-5 h-5 text-[#123B68]" />
+            <h3 class="text-lg font-extrabold text-[#123B68]">
+              Regulasi Keterbukaan Informasi Publik
+            </h3>
+          </div>
+          <span class="text-xs font-semibold text-slate-500">
+            {regulationsData.generalRegulations.length} Regulasi
+          </span>
+        </div>
+
+        <div class="space-y-3.5">
+          {
+            regulationsData.generalRegulations.map((reg) => {
+              const isExternal = reg.href.startsWith("http");
+              return (
+                <div class="card-corporate p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                  <div class="space-y-1.5 min-w-0">
+                    <div class="flex items-center gap-2 flex-wrap">
+                      <span class="px-2.5 py-0.5 rounded text-[10px] font-extrabold uppercase tracking-wider bg-[#123B68] text-[#E5B84B]">
+                        {reg.code}
+                      </span>
+                      <span class="text-xs font-semibold text-[#1769AA]">{reg.category}</span>
+                    </div>
+                    <h4 class="text-sm sm:text-base font-bold text-slate-800 leading-snug">
+                      {reg.title}
+                    </h4>
+                    <p class="text-xs text-slate-500 leading-relaxed">{reg.description}</p>
+                  </div>
+
+                  <div class="flex sm:flex-col items-center sm:items-end gap-2 shrink-0">
+                    <a
+                      href={reg.href}
+                      target={isExternal ? "_blank" : undefined}
+                      rel={isExternal ? "noopener noreferrer" : undefined}
+                      class="px-3.5 py-2 rounded-lg bg-[#123B68] hover:bg-[#1769AA] text-white text-xs font-bold inline-flex items-center gap-1.5 transition-colors whitespace-nowrap"
+                    >
+                      <FolderOpen class="w-3.5 h-3.5 text-[#E5B84B]" />
+                      <span>{isExternal ? "Lihat / Unduh" : "Lihat Detail"}</span>
+                      {isExternal && <ExternalLink class="w-3 h-3" />}
+                    </a>
+                    {reg.pdfHref && (
+                      <a
+                        href={reg.pdfHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-[#123B68] text-[11px] font-bold inline-flex items-center gap-1 transition-colors whitespace-nowrap"
+                      >
+                        <Download class="w-3 h-3 text-[#1769AA]" />
+                        <span>Unduh PDF UU 14/2008</span>
+                      </a>
+                    )}
+                  </div>
+                </div>
+              );
+            })
+          }
+        </div>
+      </div>
+
+      <!-- Right: POS Layanan Informasi Publik PPID BBPPMPV BMTI (5 cols) -->
+      <div class="lg:col-span-5 space-y-4 reveal reveal-delay-1">
+        <div class="flex items-center justify-between pb-2 border-b border-slate-200">
+          <div class="flex items-center gap-2.5">
+            <FileText class="w-5 h-5 text-[#1769AA]" />
+            <h3 class="text-lg font-extrabold text-[#123B68]">
+              Prosedur Operasional Standar (POS)
+            </h3>
+          </div>
+          <span class="text-xs font-semibold text-slate-500">5 Dokumen POS</span>
+        </div>
+
+        <div class="space-y-3.5">
+          {
+            regulationsData.posDocuments.map((pos) => {
+              const isExternal = pos.href.startsWith("http");
+              return (
+                <div class="card-corporate p-4 sm:p-5 flex flex-col justify-between gap-3 bg-white">
+                  <div>
+                    <div class="flex items-center justify-between gap-2 mb-1.5">
+                      <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-[#E5B84B]/25 text-[#123B68]">
+                        {pos.code} · {pos.category}
+                      </span>
+                      {pos.note && (
+                        <span class="text-[10px] font-medium text-amber-700 bg-amber-50 px-2 py-0.5 rounded">
+                          {pos.note}
+                        </span>
+                      )}
+                    </div>
+                    <h4 class="text-sm font-bold text-[#123B68]">{pos.title}</h4>
+                    <p class="text-xs text-slate-500 mt-1 leading-relaxed">{pos.description}</p>
+                  </div>
+
+                  <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
+                    <span class="inline-flex items-center gap-1 text-[11px] text-slate-400">
+                      <CheckCircle2 class="w-3.5 h-3.5 text-emerald-600" />
+                      <span>Dokumen Standar PPID</span>
+                    </span>
+                    <a
+                      href={pos.href}
+                      target={isExternal ? "_blank" : undefined}
+                      rel={isExternal ? "noopener noreferrer" : undefined}
+                      class="inline-flex items-center gap-1.5 text-xs font-bold text-[#1769AA] hover:text-[#123B68]"
+                    >
+                      <span>{isExternal ? "Buka Folder Drive" : "Detail POS"}</span>
+                      {isExternal ? (
+                        <ExternalLink class="w-3.5 h-3.5" />
+                      ) : (
+                        <ArrowRight class="w-3.5 h-3.5" />
+                      )}
+                    </a>
+                  </div>
+                </div>
+              );
+            })
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom Featured Official Documentation Cards -->
+    <div class="reveal reveal-delay-2">
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-base sm:text-lg font-extrabold text-[#123B68] flex items-center gap-2">
+          <FileSpreadsheet class="w-5 h-5 text-[#1769AA]" />
+          <span>Dokumen Publikasi & Akuntabilitas Utama</span>
+        </h3>
+        <a
+          href="/pbj/dokumen-pengadaan-barang-jasa"
+          class="text-xs font-bold text-[#1769AA] hover:text-[#123B68] inline-flex items-center gap-1"
+        >
+          <span>Lihat Dokumen PBJ (2023–2026)</span>
+          <ArrowRight class="w-3.5 h-3.5" />
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {
+          featuredOfficialDocs.map((doc) => (
+            <div class="card-corporate p-5 flex flex-col justify-between bg-white">
+              <div>
+                <div class="flex items-center justify-between gap-2 mb-2">
+                  <span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider bg-[#1769AA]/10 text-[#1769AA]">
+                    {doc.category}
+                  </span>
+                  <span class="text-[10px] font-medium text-slate-400">{doc.type}</span>
+                </div>
+                <h4 class="text-sm font-bold text-[#123B68] leading-snug">{doc.title}</h4>
+                <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">{doc.description}</p>
+              </div>
+
+              <div class="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between gap-2">
+                <a
+                  href={doc.pageHref}
+                  class="text-xs font-semibold text-slate-600 hover:text-[#123B68]"
+                >
+                  Halaman Detail
+                </a>
+                <a
+                  href={doc.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="px-3 py-1.5 rounded-lg bg-[#123B68] hover:bg-[#1769AA] text-white text-xs font-bold inline-flex items-center gap-1 transition-colors"
+                >
+                  <Download class="w-3.5 h-3.5 text-[#E5B84B]" />
+                  <span>Buka Asli</span>
+                </a>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

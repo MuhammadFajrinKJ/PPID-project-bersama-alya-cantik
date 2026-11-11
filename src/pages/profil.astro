@@ -1,0 +1,165 @@
+---
+import MainLayout from "../layouts/MainLayout.astro";
+import PageHeader from "../components/PageHeader.astro";
+import BlockRenderer from "../components/BlockRenderer.astro";
+import { pages } from "../data/pages";
+import { ArrowRight, Network, ClipboardCheck, Target, Users, Award } from "../components/icons";
+
+const visiMisiBlocks = pages["profil/visi-dan-misi"].blocks;
+const tugasFungsiBlocks = pages["profil/tugas-dan-fungsi"].blocks;
+const strukturBlocks = pages["profil/struktur-organisasi"].blocks;
+const pejabatBlocks = pages["informasi-publik/daftar-pejabat-struktural"].blocks;
+
+const profilSubpages = [
+  {
+    title: "Struktur Organisasi PPID",
+    desc: "Bagan Struktur Organisasi PPID BBPPMPV BMTI",
+    href: "/profil/struktur-organisasi",
+    icon: Network,
+  },
+  {
+    title: "Tugas dan Fungsi PPID",
+    desc: "8 Tugas Pokok dan 8 Fungsi Pengelolaan Informasi Publik",
+    href: "/profil/tugas-dan-fungsi",
+    icon: ClipboardCheck,
+  },
+  {
+    title: "Visi dan Misi PPID",
+    desc: "Visi Pelayanan ATRIA dan 4 Misi PPID BBPPMPV BMTI",
+    href: "/profil/visi-dan-misi",
+    icon: Target,
+  },
+  {
+    title: "Daftar Pejabat Struktural",
+    desc: "Profil Kepala BBPPMPV BMTI dan Kepala Bagian Tata Usaha (PPID)",
+    href: "/informasi-publik/daftar-pejabat-struktural",
+    icon: Users,
+  },
+  {
+    title: "Daftar Kepala dari Masa ke Masa",
+    desc: "13 Kepala BBPPMPV BMTI periode 1980 hingga sekarang",
+    href: "/informasi-publik/daftar-kepala",
+    icon: Award,
+  },
+];
+---
+
+<MainLayout
+  title="Profil PPID — PPID BBPPMPV BMTI Kemendikdasmen"
+  description="Profil resmi Pejabat Pengelola Informasi dan Dokumentasi (PPID) BBPPMPV BMTI meliputi Visi & Misi, Tugas & Fungsi, Struktur Organisasi, serta Pejabat Struktural."
+>
+  <PageHeader
+    title="Profil PPID BBPPMPV BMTI"
+    eyebrow="Tentang PPID"
+    description="Informasi kelembagaan Pejabat Pengelola Informasi dan Dokumentasi (PPID) Balai Besar Pengembangan Penjaminan Mutu Pendidikan Vokasi Bidang Mesin dan Teknik Industri."
+    breadcrumbs={[{ label: "Profil PPID" }]}
+    sourceUrl="https://bbppmpvbmti.kemendikdasmen.go.id/Ppid/profil-ppid-bbppmpv-bmti/"
+  />
+
+  <section class="py-16 bg-[#F5F7FA]">
+    <div class="container-corporate space-y-14">
+      <!-- Quick Subpage Directory Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 reveal">
+        {
+          profilSubpages.map((sp) => {
+            const Icon = sp.icon;
+            return (
+              <a
+                href={sp.href}
+                class="card-corporate p-5 flex flex-col justify-between bg-white group"
+              >
+                <div>
+                  <div class="w-10 h-10 rounded-xl bg-[#123B68]/10 group-hover:bg-[#123B68] text-[#123B68] group-hover:text-[#E5B84B] flex items-center justify-center mb-3 transition-colors">
+                    <Icon class="w-5 h-5" />
+                  </div>
+                  <h2 class="text-sm font-extrabold text-[#123B68] group-hover:text-[#1769AA]">
+                    {sp.title}
+                  </h2>
+                  <p class="text-xs text-slate-500 mt-1 leading-relaxed">{sp.desc}</p>
+                </div>
+                <div class="mt-4 pt-2 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-[#1769AA]">
+                  <span>Buka Halaman</span>
+                  <ArrowRight class="w-3.5 h-3.5" />
+                </div>
+              </a>
+            );
+          })
+        }
+      </div>
+
+      <!-- Section 1: Visi dan Misi PPID -->
+      <div id="visi-misi" class="space-y-4 reveal">
+        <div class="border-b border-slate-200 pb-3 flex items-center justify-between">
+          <div>
+            <span class="section-eyebrow">Arah Pelayanan</span>
+            <h2 class="text-2xl font-extrabold text-[#123B68]">Visi dan Misi PPID</h2>
+          </div>
+          <a
+            href="/profil/visi-dan-misi"
+            class="text-xs font-bold text-[#1769AA] hover:text-[#123B68] inline-flex items-center gap-1"
+          >
+            <span>Halaman Mandiri</span>
+            <ArrowRight class="w-3.5 h-3.5" />
+          </a>
+        </div>
+        <BlockRenderer blocks={visiMisiBlocks} slug="profil/visi-dan-misi" />
+      </div>
+
+      <!-- Section 2: Struktur Organisasi PPID -->
+      <div id="struktur-organisasi" class="space-y-4 reveal">
+        <div class="border-b border-slate-200 pb-3 flex items-center justify-between">
+          <div>
+            <span class="section-eyebrow">Tata Kelola Organisasi</span>
+            <h2 class="text-2xl font-extrabold text-[#123B68]">Struktur Organisasi PPID</h2>
+          </div>
+          <a
+            href="/profil/struktur-organisasi"
+            class="text-xs font-bold text-[#1769AA] hover:text-[#123B68] inline-flex items-center gap-1"
+          >
+            <span>Halaman Mandiri</span>
+            <ArrowRight class="w-3.5 h-3.5" />
+          </a>
+        </div>
+        <BlockRenderer blocks={strukturBlocks} slug="profil/struktur-organisasi" />
+      </div>
+
+      <!-- Section 3: Tugas dan Fungsi PPID -->
+      <div id="tugas-fungsi" class="space-y-4 reveal">
+        <div class="border-b border-slate-200 pb-3 flex items-center justify-between">
+          <div>
+            <span class="section-eyebrow">Tupoksi Resmi</span>
+            <h2 class="text-2xl font-extrabold text-[#123B68]">Tugas dan Fungsi PPID</h2>
+          </div>
+          <a
+            href="/profil/tugas-dan-fungsi"
+            class="text-xs font-bold text-[#1769AA] hover:text-[#123B68] inline-flex items-center gap-1"
+          >
+            <span>Halaman Mandiri</span>
+            <ArrowRight class="w-3.5 h-3.5" />
+          </a>
+        </div>
+        <BlockRenderer blocks={tugasFungsiBlocks} slug="profil/tugas-dan-fungsi" />
+      </div>
+
+      <!-- Section 4: Pejabat Struktural BBPPMPV BMTI -->
+      <div id="pejabat-struktural" class="space-y-4 reveal">
+        <div class="border-b border-slate-200 pb-3 flex items-center justify-between">
+          <div>
+            <span class="section-eyebrow">Pimpinan & Pengelola</span>
+            <h2 class="text-2xl font-extrabold text-[#123B68]">
+              Daftar Pejabat Struktural BBPPMPV BMTI
+            </h2>
+          </div>
+          <a
+            href="/informasi-publik/daftar-kepala"
+            class="btn-outline-navy !py-2 !px-4 !text-xs"
+          >
+            <Award class="w-4 h-4" />
+            <span>Lihat Daftar Kepala (1980–Sekarang)</span>
+          </a>
+        </div>
+        <BlockRenderer blocks={pejabatBlocks} slug="informasi-publik/daftar-pejabat-struktural" />
+      </div>
+    </div>
+  </section>
+</MainLayout>

@@ -1,11 +1,21 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import MainLayout from "../layouts/MainLayout.astro";
+import Hero from "../components/Hero.astro";
+import AboutPPID from "../components/AboutPPID.astro";
+import PublicInformation from "../components/PublicInformation.astro";
+import InformationService from "../components/InformationService.astro";
+import Regulations from "../components/Regulations.astro";
+import NewsSection from "../components/NewsSection.astro";
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<MainLayout
+  title="Beranda — PPID BBPPMPV BMTI Kemendikdasmen"
+  description="Portal Resmi Pejabat Pengelola Informasi dan Dokumentasi (PPID) Balai Besar Pengembangan Penjaminan Mutu Pendidikan Vokasi Bidang Mesin dan Teknik Industri (BBPPMPV BMTI) Kementerian Pendidikan Dasar dan Menengah."
+>
+  <Hero />
+  <AboutPPID />
+  <PublicInformation />
+  <InformationService />
+  <Regulations />
+  <NewsSection />
+</MainLayout>

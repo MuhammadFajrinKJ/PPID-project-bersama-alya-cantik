@@ -1,0 +1,483 @@
+---
+import { Image } from "astro:assets";
+import {
+  FileCheck2,
+  ShieldAlert,
+  Scale,
+  Megaphone,
+  Award,
+  FileDown,
+  ExternalLink,
+  Clock,
+  MapPin,
+  Phone,
+  Mail,
+  CheckCircle2,
+  ArrowRight,
+  MessageSquareWarning,
+} from "./icons";
+import { siteConfig } from "../data/site";
+import maklumatPpid from "../assets/images/layanan/maklumat-ppid.png";
+import maklumatPelayanan from "../assets/images/layanan/maklumat-pelayanan.png";
+
+const mainServiceCards = [
+  {
+    title: "Permohonan Informasi Publik",
+    badge: "10 + 7 Hari Kerja · Gratis",
+    description:
+      "Pelayanan permintaan informasi dan dokumen dilakukan satu pintu melalui ULP BBPPMPV BMTI secara langsung maupun daring sesuai UU Nomor 14 Tahun 2008.",
+    icon: FileCheck2,
+    procedureHref: "/layanan-informasi/prosedur-permintaan-informasi",
+    formHref: "/layanan-informasi/formulir-permintaan-informasi",
+    directLinks: [
+      {
+        label: "Formulir Online Permintaan Informasi",
+        href: "https://docs.google.com/forms/d/e/1FAIpQLSfZH6eWc5zwnniOs0-jn6siXyABt5-eW2W5RrUSy0eSHoRJbQ/viewform",
+        external: true,
+      },
+      {
+        label: "Formulir Offline Permintaan Informasi",
+        href: "https://drive.google.com/file/d/1SJNJKotv7UxxFmR9WUxR1A8ICWHIjovl/view",
+        external: true,
+      },
+      {
+        label: "Formulir Offline Bermaterai",
+        href: "https://drive.google.com/file/d/1CjpifH_ZxU0BLoSN4tFJNkYxEJlDkpP8/view",
+        external: true,
+      },
+    ],
+  },
+  {
+    title: "Pengajuan Keberatan Informasi",
+    badge: "Maks. 30 Hari Kerja",
+    description:
+      "Pemohon informasi yang menilai tanggapan tertulis PPID belum memenuhi permintaan dapat mengajukan keberatan tertulis kepada Atasan PPID (Kepala BBPPMPV BMTI).",
+    icon: ShieldAlert,
+    procedureHref: "/layanan-informasi/prosedur-pengajuan-keberatan",
+    formHref: "/layanan-informasi/formulir-keberatan-informasi",
+    directLinks: [
+      {
+        label: "Form Online Keberatan Informasi",
+        href: "https://docs.google.com/forms/d/170FUxSNhSmZuMIt3RAiSTl3qYsUImNLQgUT97cEvsM8/viewform",
+        external: true,
+      },
+      {
+        label: "Form Offline Keberatan (Folder Drive)",
+        href: "https://drive.google.com/drive/u/1/folders/1ZDbuIZpV6Fg0AgcUPl_qbKzM9PZra83e",
+        external: true,
+      },
+    ],
+  },
+  {
+    title: "Penyelesaian Sengketa Informasi",
+    badge: "14 Hari Kerja ke KIP",
+    description:
+      "Apabila tanggapan tertulis Atasan PPID belum memuaskan, pemohon dapat mengajukan sengketa informasi ke Komisi Informasi Pusat melalui mediasi atau adjudikasi nonlitigasi.",
+    icon: Scale,
+    procedureHref: "/layanan-informasi/prosedur-penyelesaian-sengketa",
+    formHref: "https://simsi.komisiinformasi.go.id/register",
+    externalForm: true,
+    directLinks: [
+      {
+        label: "Registrasi Sengketa (SIMSI Komisi Informasi)",
+        href: "https://simsi.komisiinformasi.go.id/register",
+        external: true,
+      },
+      {
+        label: "Portal Resmi SIMSI Komisi Informasi Pusat",
+        href: "https://simsi.komisiinformasi.go.id/",
+        external: true,
+      },
+    ],
+  },
+  {
+    title: "Pengaduan Wewenang & WBS",
+    badge: "Identitas Dirahasiakan",
+    description:
+      "Saluran resmi pelaporan penyalahgunaan wewenang atau pelanggaran di lingkungan BBPPMPV BMTI dengan jaminan kerahasiaan identitas pelapor.",
+    icon: Megaphone,
+    procedureHref: "/layanan-informasi/prosedur-pengaduan-via-wbs",
+    formHref: "https://wbs.kemendikdasmen.go.id/",
+    externalForm: true,
+    directLinks: [
+      {
+        label: "WBS Kemendikdasmen (Bagi Pegawai)",
+        href: "https://wbs.kemendikdasmen.go.id/",
+        external: true,
+      },
+      {
+        label: "Posko Pengaduan Itjen (Non-Pegawai)",
+        href: "https://posko-pengaduan.itjen.kemendikdasmen.go.id/",
+        external: true,
+      },
+      {
+        label: "Prosedur Pengaduan via STPP (Drive)",
+        href: "https://drive.google.com/file/d/1aiTU-CwBx6iqf8Su5jQ4b9MMxXulk7X0/view",
+        external: true,
+      },
+      {
+        label: "Formulir Pengaduan via STPP (Google Form)",
+        href: "https://docs.google.com/forms/d/e/1FAIpQLSeGphB59ebq28B8-cB0f-2Z4eQ5v32-I_E7W5m7t8p2O7A7sQ/viewform",
+        external: true,
+      },
+    ],
+  },
+];
+
+const integratedChannels = [
+  {
+    name: "Whistle Blowing System (WBS)",
+    desc: "Kanal pelaporan pelanggaran disiplin & integritas",
+    href: "https://wbs.kemendikdasmen.go.id/",
+    external: true,
+  },
+  {
+    name: "SP4N-LAPOR!",
+    desc: "Layanan Aspirasi dan Pengaduan Online Rakyat",
+    href: "https://www.lapor.go.id/",
+    external: true,
+  },
+  {
+    name: "e-PPID Versi Android",
+    desc: "Unduh aplikasi mobile e-PPID BBPPMPV BMTI (.apk)",
+    href: "https://drive.google.com/drive/folders/1c3b7nI9G-t9cI9s5-E9J-o9a-L8x-R9Q",
+    external: true,
+  },
+  {
+    name: "Jejak Surat (Simpul BMTI)",
+    desc: "Pelacakan persuratan & layanan terpadu BMTI",
+    href: "https://bbppmpvbmti.kemendikdasmen.go.id/simpul/",
+    external: true,
+  },
+  {
+    name: "ULT Kemendikdasmen",
+    desc: "Unit Layanan Terpadu Kementerian Pendidikan Dasar & Menengah",
+    href: "https://ult.kemendikdasmen.go.id/",
+    external: true,
+  },
+  {
+    name: "Standar & Maklumat Pelayanan",
+    desc: "Standar Pelayanan Pelatihan & Maklumat PPID",
+    href: "/layanan-informasi/standar-pelayanan",
+    external: false,
+  },
+];
+---
+
+<section id="layanan-informasi" class="py-20 sm:py-24 bg-white relative">
+  <div class="container-corporate">
+    <!-- Section Heading -->
+    <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-12 reveal">
+      <div class="max-w-2xl">
+        <span class="section-eyebrow">Prosedur & Layanan Satu Pintu</span>
+        <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#123B68] tracking-tight">
+          Layanan Informasi Publik
+        </h2>
+        <p class="mt-3 text-slate-600 text-sm sm:text-base leading-relaxed">
+          Seluruh layanan permohonan informasi, pengajuan keberatan, penyelesaian sengketa, serta pengaduan masyarakat diselenggarakan secara transparan, mudah diakses, dan tidak dipungut biaya.
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <a href="/layanan-informasi" class="btn-primary !py-2.5 !px-5 !text-xs sm:!text-sm">
+          <span>Pusat Layanan PPID</span>
+          <ArrowRight class="w-4 h-4" />
+        </a>
+        <a
+          href="/layanan-informasi/standar-pelayanan"
+          class="btn-outline-navy !py-2.5 !px-5 !text-xs sm:!text-sm"
+        >
+          <Award class="w-4 h-4" />
+          <span>Standar Pelayanan</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- 4 Main Service Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12 reveal reveal-delay-1">
+      {
+        mainServiceCards.map((service) => {
+          const Icon = service.icon;
+          return (
+            <div class="card-corporate p-6 sm:p-7 flex flex-col justify-between">
+              <div>
+                <div class="flex items-start justify-between gap-4 mb-4">
+                  <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#123B68] to-[#1769AA] text-white flex items-center justify-center shrink-0 shadow-md">
+                    <Icon class="w-6 h-6 text-[#E5B84B]" />
+                  </div>
+                  <span class="px-3 py-1 rounded-full text-xs font-bold bg-[#F5F7FA] text-[#123B68] border border-slate-200">
+                    {service.badge}
+                  </span>
+                </div>
+
+                <h3 class="text-xl font-extrabold text-[#123B68]">{service.title}</h3>
+                <p class="text-sm text-slate-600 mt-2 leading-relaxed">{service.description}</p>
+
+                <!-- Direct Form / Document Links -->
+                <div class="mt-5 pt-4 border-t border-slate-100 space-y-2">
+                  <p class="text-[11px] font-bold uppercase tracking-wider text-slate-400">
+                    Formulir & Tautan Resmi:
+                  </p>
+                  <div class="space-y-1.5">
+                    {service.directLinks.map((dl) => (
+                      <a
+                        href={dl.href}
+                        target={dl.external ? "_blank" : undefined}
+                        rel={dl.external ? "noopener noreferrer" : undefined}
+                        class="flex items-center justify-between gap-2 px-3 py-2 rounded-lg bg-[#F5F7FA] hover:bg-[#123B68] text-slate-700 hover:text-white text-xs font-semibold transition-colors group/link"
+                      >
+                        <span class="flex items-center gap-2 truncate">
+                          <FileDown class="w-3.5 h-3.5 text-[#1769AA] group-hover/link:text-[#E5B84B] shrink-0" />
+                          <span class="truncate">{dl.label}</span>
+                        </span>
+                        <ExternalLink class="w-3.5 h-3.5 text-slate-400 group-hover/link:text-[#E5B84B] shrink-0" />
+                      </a>
+                    ))}
+                  </div>
+                </div>
+              </div>
+
+              <!-- Card Action Footer -->
+              <div class="mt-6 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+                <a
+                  href={service.procedureHref}
+                  class="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-[#1769AA] hover:text-[#123B68]"
+                >
+                  <span>Baca Prosedur Lengkap</span>
+                  <ArrowRight class="w-4 h-4" />
+                </a>
+
+                <a
+                  href={service.formHref}
+                  target={service.externalForm ? "_blank" : undefined}
+                  rel={service.externalForm ? "noopener noreferrer" : undefined}
+                  class="px-4 py-2 rounded-lg bg-[#123B68] hover:bg-[#1769AA] text-white text-xs font-bold inline-flex items-center gap-1.5 transition-colors"
+                >
+                  <span>Akses Formulir</span>
+                  {service.externalForm ? (
+                    <ExternalLink class="w-3.5 h-3.5 text-[#E5B84B]" />
+                  ) : (
+                    <ArrowRight class="w-3.5 h-3.5 text-[#E5B84B]" />
+                  )}
+                </a>
+              </div>
+            </div>
+          );
+        })
+      }
+    </div>
+
+    <!-- Requirements, Schedule & Maklumat Showcase (Two Columns) -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch reveal reveal-delay-2">
+      <!-- Left: Mandatory Requirements & Schedule Card -->
+      <div class="lg:col-span-7 card-corporate p-6 sm:p-8 bg-gradient-to-br from-[#0A2544] via-[#123B68] to-[#1769AA] text-white border-none flex flex-col justify-between">
+        <div class="space-y-6">
+          <div>
+            <span class="section-eyebrow section-eyebrow-light">Ketentuan Resmi Pemohon</span>
+            <h3 class="text-xl sm:text-2xl font-extrabold text-white">
+              Persyaratan & Jadwal Pelayanan Informasi
+            </h3>
+            <p class="text-xs sm:text-sm text-slate-200 mt-1.5">
+              Berdasarkan Undang-Undang Nomor 14 Tahun 2008, pemohon informasi wajib melampirkan identitas sah sesuai kategori pemohon:
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3.5">
+            <div class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-xl p-4">
+              <span class="text-[11px] font-bold uppercase tracking-wider text-[#E5B84B]">
+                01 · Pribadi
+              </span>
+              <h4 class="text-sm font-bold text-white mt-1">Pemohon Perorangan</h4>
+              <p class="text-xs text-slate-200 mt-1.5 leading-relaxed">
+                Wajib melampirkan <strong>fotokopi KTP</strong> yang masih berlaku.
+              </p>
+            </div>
+
+            <div class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-xl p-4">
+              <span class="text-[11px] font-bold uppercase tracking-wider text-[#E5B84B]">
+                02 · LSM / Ormas
+              </span>
+              <h4 class="text-sm font-bold text-white mt-1">Lembaga Swadaya</h4>
+              <p class="text-xs text-slate-200 mt-1.5 leading-relaxed">
+                Wajib menyertakan <strong>fotokopi akta notaris</strong> dengan nomor registrasi Kemenkumham / Kemendagri.
+              </p>
+            </div>
+
+            <div class="bg-white/10 backdrop-blur-sm border border-white/15 rounded-xl p-4">
+              <span class="text-[11px] font-bold uppercase tracking-wider text-[#E5B84B]">
+                03 · Perusahaan
+              </span>
+              <h4 class="text-sm font-bold text-white mt-1">Badan Usaha</h4>
+              <p class="text-xs text-slate-200 mt-1.5 leading-relaxed">
+                Wajib menyertakan <strong>fotokopi akta pendirian perusahaan</strong> yang sah.
+              </p>
+            </div>
+          </div>
+
+          <!-- Schedule & Contact Box -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+            <div class="bg-[#07192F]/50 rounded-xl p-4 border border-white/10 space-y-2">
+              <div class="flex items-center gap-2 text-xs font-bold text-[#E5B84B] uppercase tracking-wider">
+                <Clock class="w-4 h-4" />
+                <span>Jadwal Pelayanan Informasi</span>
+              </div>
+              <div class="space-y-1 text-xs text-slate-200">
+                <div class="flex justify-between">
+                  <span>Pendaftaran:</span>
+                  <strong class="text-white">08.00 – 11.00 WIB</strong>
+                </div>
+                <div class="flex justify-between">
+                  <span>Senin – Kamis:</span>
+                  <strong class="text-white">09.00 – 15.00 WIB</strong>
+                </div>
+                <div class="flex justify-between">
+                  <span>Istirahat (Sen–Kam):</span>
+                  <span>12.00 – 13.00 WIB</span>
+                </div>
+                <div class="flex justify-between">
+                  <span>Jumat:</span>
+                  <strong class="text-white">09.00 – 15.30 WIB</strong>
+                </div>
+                <div class="flex justify-between">
+                  <span>Istirahat (Jumat):</span>
+                  <span>11.30 – 13.30 WIB</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-[#07192F]/50 rounded-xl p-4 border border-white/10 space-y-2.5">
+              <div class="flex items-center gap-2 text-xs font-bold text-[#E5B84B] uppercase tracking-wider">
+                <MapPin class="w-4 h-4" />
+                <span>Kontak Layanan ULP</span>
+              </div>
+              <p class="text-xs text-slate-200 leading-relaxed">
+                {siteConfig.contact.address}
+              </p>
+              <div class="space-y-1 text-xs">
+                <a
+                  href={siteConfig.contact.phoneHref}
+                  class="flex items-center gap-2 text-white hover:text-[#E5B84B]"
+                >
+                  <Phone class="w-3.5 h-3.5 text-[#E5B84B]" />
+                  <span>Telp: {siteConfig.contact.phone} · WA: {siteConfig.contact.whatsapp}</span>
+                </a>
+                <a
+                  href={`mailto:${siteConfig.contact.email}`}
+                  class="flex items-center gap-2 text-white hover:text-[#E5B84B] truncate"
+                >
+                  <Mail class="w-3.5 h-3.5 text-[#E5B84B]" />
+                  <span class="truncate">{siteConfig.contact.email}</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-white/15 flex flex-wrap items-center justify-between gap-3 text-xs text-slate-200">
+          <span class="flex items-center gap-1.5">
+            <CheckCircle2 class="w-4 h-4 text-[#E5B84B]" />
+            <span>Biaya penggandaan dokumen / CD (jika ada) dibebankan kepada pemohon informasi.</span>
+          </span>
+          <a
+            href="https://docs.google.com/forms/d/1PEU05Fa7wrA5qa7bFhx8fEFlt_bhKKFSKr4wLUehN00/viewform"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-[#E5B84B] font-bold hover:underline inline-flex items-center gap-1"
+          >
+            <span>Formulir Permohonan (Tautan Prosedur)</span>
+            <ExternalLink class="w-3.5 h-3.5" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Maklumat Pelayanan Informasi Publik & Integrated Portals -->
+      <div class="lg:col-span-5 flex flex-col justify-between gap-6">
+        <!-- Maklumat Visual Card -->
+        <div class="card-corporate overflow-hidden">
+          <div class="p-4 bg-[#F5F7FA] border-b border-slate-100 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] font-bold uppercase tracking-wider text-[#1769AA]">
+                Komitmen Resmi
+              </span>
+              <h3 class="text-sm font-bold text-[#123B68]">
+                Maklumat Pelayanan Informasi Publik
+              </h3>
+            </div>
+            <a
+              href="/layanan-informasi/maklumat"
+              class="text-xs font-bold text-[#1769AA] hover:text-[#123B68] inline-flex items-center gap-1"
+            >
+              <span>Lihat Semua</span>
+              <ArrowRight class="w-3.5 h-3.5" />
+            </a>
+          </div>
+          <div class="grid grid-cols-2 gap-3 p-4 bg-white">
+            <a
+              href="/layanan-informasi/maklumat-pelayanan-informasi-publik"
+              class="group block rounded-lg overflow-hidden border border-slate-200 img-zoom-wrap"
+            >
+              <Image
+                src={maklumatPpid}
+                alt="Maklumat Pelayanan Informasi Publik PPID BBPPMPV BMTI"
+                width={320}
+                height={220}
+                class="w-full h-32 object-cover"
+              />
+              <div class="p-2 bg-[#F5F7FA] text-[11px] font-bold text-[#123B68] group-hover:text-[#1769AA] truncate">
+                Maklumat PPID BMTI
+              </div>
+            </a>
+            <a
+              href="/layanan-informasi/maklumat-pelayanan"
+              class="group block rounded-lg overflow-hidden border border-slate-200 img-zoom-wrap"
+            >
+              <Image
+                src={maklumatPelayanan}
+                alt="Maklumat Pelayanan BBPPMPV BMTI"
+                width={320}
+                height={220}
+                class="w-full h-32 object-cover"
+              />
+              <div class="p-2 bg-[#F5F7FA] text-[11px] font-bold text-[#123B68] group-hover:text-[#1769AA] truncate">
+                Maklumat Pelayanan Balai
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Integrated Channels Grid -->
+        <div class="card-corporate p-5 bg-[#F5F7FA] flex-1">
+          <div class="flex items-center gap-2 mb-3">
+            <MessageSquareWarning class="w-4 h-4 text-[#1769AA]" />
+            <h3 class="text-sm font-bold text-[#123B68]">
+              Kanal Pengaduan & Layanan Terintegrasi
+            </h3>
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            {
+              integratedChannels.map((ch) => (
+                <a
+                  href={ch.href}
+                  target={ch.external ? "_blank" : undefined}
+                  rel={ch.external ? "noopener noreferrer" : undefined}
+                  class="p-3 rounded-xl bg-white border border-slate-200/80 hover:border-[#1769AA] hover:shadow-sm transition-all group"
+                >
+                  <div class="flex items-center justify-between gap-1">
+                    <span class="text-xs font-bold text-[#123B68] group-hover:text-[#1769AA] truncate">
+                      {ch.name}
+                    </span>
+                    {ch.external ? (
+                      <ExternalLink class="w-3.5 h-3.5 text-slate-400 group-hover:text-[#1769AA] shrink-0" />
+                    ) : (
+                      <ArrowRight class="w-3.5 h-3.5 text-slate-400 group-hover:text-[#1769AA] shrink-0" />
+                    )}
+                  </div>
+                  <p class="text-[11px] text-slate-500 mt-0.5 line-clamp-1">{ch.desc}</p>
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
